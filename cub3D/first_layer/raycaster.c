@@ -1,0 +1,76 @@
+#include "raycaster.h"
+
+void raycast_init(const t_player *player, const t_map *map, t_raycast *r)
+{
+    r->pos_x = player->pos_x;
+    r->pos_y = player->pos_y;
+    r->dir_x = cos(player->camera_direction);
+    r->dir_y = sin(player->camera_direction);
+    r->case_x = r->pos_x / map->size_of_block;
+    r->case_y = r->pos_y / map->size_of_block;
+    if (r->dir_x == 0)
+	   r->delta_x = 1e30;
+    else 
+    	r->delta_x = fabs(map->size_of_block / r->dir_x);
+
+    if (r->dir_y == 0)
+	    r->delta_y = 1e30;
+    else
+    	r->delta_y = fabs(map->size_of_block / r->dir_y);
+
+    if (r->dir_x > 0)
+    {
+        r->step_x = 1;
+        r->side_dist_x = ((r->case_x + 1) * map->size_of_block - r->pos_x) / r->dir_x;
+    }
+    else
+    {
+        r->step_x = -1;
+        r->side_dist_x = (r->pos_x - (r->case_x * map->size_of_block)) / fabs(r->dir_x);
+    }
+
+    if (r->dir_y > 0)
+    {
+        r->step_y = 1;
+        r->side_dist_y = ((r->case_y + 1) * map->size_of_block - r->pos_y) / r->dir_y;
+    }
+    else
+    {
+        r->step_y = -1;
+        r->side_dist_y = (r->pos_y - (r->case_y * map->size_of_block)) / fabs(r->dir_y);
+    }
+}
+
+double raycasting(const t_player *player, t_map *map)
+{
+	t_raycast raycast;
+	
+	raycast_init(player, map, &raycast);	
+
+	while (1)
+	{
+		if (raycast.side_dist_x < raycast.side_dist_y)
+		{
+			raycast.side_dist_x += raycast.delta_x;
+			raycast.case_x += raycast.step_x;
+			raycast.side = 0; // vertical
+		}
+		else 
+		{
+			raycast.side_dist_y += raycast.delta_y;
+			raycast.case_y += raycast.step_y;
+			raycast.side = 1;
+		}
+		if (map->grid[raycast.case_y][raycast.case_x] != 0)
+			break;
+	}
+
+	if (raycast.side == 0)	
+		raycast.distance = ((raycast.case_x - raycast.pos_x / map->size_of_block) + (1 - raycast.step_x) / 2 ) * raycast.delta_x;
+
+	else
+		raycast.distance = ((raycast.case_y - raycast.pos_y / map->size_of_block) + (1 - raycast.step_y) / 2 ) * raycast.delta_y;
+	return raycast.distance;
+}
+
+
