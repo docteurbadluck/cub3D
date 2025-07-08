@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 11:27:12 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:46:34 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,42 @@ void	background_render(int color_sky, int color_ground, t_mlx_data *my_mlx)
 }
 
 
-
 void mlx_display(const t_displayer *self, const t_framebuffer *frame_buff)
 {
 	const t_mlx_displayer *displayer = (const t_mlx_displayer *)self;
 
-	// Clear the image buffer
-	background_render(CYAN, YELLOW, displayer->mlx); 
-	(void)frame_buff;
-	/*
-	// Example render loop: just vertical lines for each ray
-for (int i = 0; i < NBR_RAY; i++)
-{
-    double distance = frame_buff->rays[i].distance;
-    if (distance < 0.0001)
-        distance = 0.0001;
+	// Fill background (e.g., sky and floor)
+	background_render(CYAN, YELLOW, displayer->mlx);
 
-    int line_height = (int)(HEIGHT / distance);
+	for (int i = 0; i < NBR_RAY; i++)
+	{
+		double dist = fabs(frame_buff->rays[i].distance);
 
-    int start = (HEIGHT / 2) - (line_height / 2);
-    int end = (HEIGHT / 2) + (line_height / 2);
+	
+		if (dist < 0.0001) // avoid division by zero or extreme values
+		{
+			dist = 0.0001;
+		}
 
-    int x = (i * WIDTH) / NBR_RAY;  // map ray to screen column
+		int line_height = (int)(HEIGHT / dist);
+		int draw_start = (HEIGHT - line_height) / 2;
+		int draw_end = (HEIGHT + line_height) / 2;
 
-    for (int y = start; y < end; y++)
-    {
-        my_pixel_put(x, y, &displayer->mlx->img, 0xFFFFFF);
-    }
-}	*/
+		int screen_x = (i * WIDTH) / NBR_RAY;
+
+		// Clamp drawing boundaries
+		if (draw_start < 0)
+			draw_start = 0;
+		if (draw_end > HEIGHT)
+			draw_end = HEIGHT;
+
+		for (int y = draw_start; y < draw_end; y++)
+		{
+			my_pixel_put(screen_x, y, &displayer->mlx->img, 0xFFFFFF);
+		}
+	}
 }
+
 
 void mlx_clear_screen(const t_displayer *self)
 {

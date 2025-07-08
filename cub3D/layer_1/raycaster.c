@@ -41,6 +41,15 @@ void raycast_init(const t_player *player, const t_map *map, t_raycast *r)
     }
 }
 
+static double normalize_angle(double angle)
+{
+	while (angle < 0)
+		angle += 2 * M_PI;
+	while (angle >= 2 * M_PI)
+		angle -= 2 * M_PI;
+	return angle;
+}
+
 t_raycast raycasting(const t_player *player, const t_map *map)
 {
 	t_raycast raycast;
@@ -72,7 +81,6 @@ t_raycast raycasting(const t_player *player, const t_map *map)
 }
 
 
-
 t_raycast *raycasting_multiple(const t_player *player, const t_map *map)
 {
 	t_raycast			*rays;
@@ -89,9 +97,12 @@ t_raycast *raycasting_multiple(const t_player *player, const t_map *map)
 	for (i = 0; i < NBR_RAY; i++)
 	{
 		double angle_offset = (i - (NBR_RAY / 2.0)) * angle_step;
-		raycaster.ray_angle = player->camera_direction + angle_offset;
+		raycaster.ray_angle = normalize_angle(player->camera_direction + angle_offset);
+
 		raycaster.copy_player.camera_direction = raycaster.ray_angle;
 		rays[i] = raycasting(&raycaster.copy_player, map);
+		double angle_diff = normalize_angle(raycaster.ray_angle - player->camera_direction);
+		rays[i].distance *= cos(angle_diff);
 	}
 	return rays;
 }

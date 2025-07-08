@@ -4,7 +4,7 @@
 #include "player.h"
 #include "map.h"
 #define NBR_RAY 800
-#define FOV (M_PI / 2)
+#define FOV (M_PI/2)
 
 typedef struct s_raycast
 {

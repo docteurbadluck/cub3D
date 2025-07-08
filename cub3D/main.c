@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:46:50 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 11:55:11 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:10:53 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int game_loop(void *param)
 	update_player(&ctx->player, ctx->controller, ctx->map);
 	player_print_state(&ctx->player);
 	update_vision(&ctx->player, ctx->map, ctx->displayer);
+	
 	return (0);
 }
 

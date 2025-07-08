@@ -6,13 +6,12 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 11:57:36 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 13:05:16 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_context.h"
 #include "../game_context.h"
-
 
 void	free_map_grid(t_map *map)
 {
