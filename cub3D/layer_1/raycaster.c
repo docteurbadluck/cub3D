@@ -74,9 +74,11 @@ t_raycast raycasting(const t_player *player, const t_map *map)
 			break;
 	}
 	if (raycast.side == 0)	
-		raycast.distance = ((raycast.case_x - raycast.pos_x / map->size_of_block) + (1 - raycast.step_x) / 2 ) * raycast.delta_x;
+		raycast.distance = ((raycast.case_x - (raycast.pos_x / map->size_of_block)) + (1 - raycast.step_x) / 2 ) * raycast.delta_x;
 	else
-		raycast.distance = ((raycast.case_y - raycast.pos_y / map->size_of_block) + (1 - raycast.step_y) / 2 ) * raycast.delta_y;
+		raycast.distance = ((raycast.case_y - (raycast.pos_y / map->size_of_block)) + (1 - raycast.step_y) / 2 ) * raycast.delta_y;
+
+	raycast.distance = fabs(raycast.distance);
 	return raycast;
 }
 

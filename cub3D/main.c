@@ -6,11 +6,15 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:46:50 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 13:10:53 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 14:09:20 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_context.h"
+
+
+# define CYAN        0x00FFFF
+# define YELLOW      0xFFFF00
 
 int **create_grid(int height, int width)
 {
@@ -63,6 +67,8 @@ int main()
 	my_displayer = create_displayer(&my_mlx);
 	init_player(&ctx.player, 15, 15, 0.0);
 	ctx.map = init_map(10, 10, 10, grid);
+	init_map_texture(ctx.map, CYAN, YELLOW);
+	
 	ctx.controller = my_controller;
 	ctx.displayer = my_displayer;
 	mlx_loop_hook(my_mlx.mlx_ptr, game_loop, &ctx);
