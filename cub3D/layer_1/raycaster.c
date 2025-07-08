@@ -41,7 +41,7 @@ void raycast_init(const t_player *player, const t_map *map, t_raycast *r)
     }
 }
 
-double raycasting(const t_player *player, t_map *map)
+t_raycast raycasting(const t_player *player, const t_map *map)
 {
 	t_raycast raycast;
 	
@@ -64,13 +64,35 @@ double raycasting(const t_player *player, t_map *map)
 		if (map->grid[raycast.case_y][raycast.case_x] != 0)
 			break;
 	}
-
 	if (raycast.side == 0)	
 		raycast.distance = ((raycast.case_x - raycast.pos_x / map->size_of_block) + (1 - raycast.step_x) / 2 ) * raycast.delta_x;
-
 	else
 		raycast.distance = ((raycast.case_y - raycast.pos_y / map->size_of_block) + (1 - raycast.step_y) / 2 ) * raycast.delta_y;
-	return raycast.distance;
+	return raycast;
 }
 
+
+
+t_raycast *raycasting_multiple(const t_player *player, const t_map *map)
+{
+	t_raycast			*rays;
+	t_multiple_raycast	raycaster;
+	double				angle_step;
+	int					i;
+
+	rays = malloc(sizeof(t_raycast) * NBR_RAY);
+	if (!rays)
+		return NULL;
+	raycaster.copy_player = *player;
+	raycaster.fov = FOV;
+	angle_step = raycaster.fov / NBR_RAY;
+	for (i = 0; i < NBR_RAY; i++)
+	{
+		double angle_offset = (i - (NBR_RAY / 2.0)) * angle_step;
+		raycaster.ray_angle = player->camera_direction + angle_offset;
+		raycaster.copy_player.camera_direction = raycaster.ray_angle;
+		rays[i] = raycasting(&raycaster.copy_player, map);
+	}
+	return rays;
+}
 

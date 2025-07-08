@@ -14,7 +14,7 @@ SRC = main.c \
 HEADERS = layer_1/map.h layer_1/player.h layer_1/raycaster.h \
 	layer_2/update_vision.h layer_2/update_player.h layer_2/update_game.h \
 	layer_3/controller.h layer_3/displayer.h \
-	layer_4/mlx_context.h layer_4/mlx_controller.h layer_4/mlx_displayer.h
+	layer_4/mlx_context.h layer_4/mlx_controller.h layer_4/mlx_displayer.h game_context.h
 
 BUILD_DIR = build
 OBJ_FILES = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC))

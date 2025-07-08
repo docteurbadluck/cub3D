@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 10:53:29 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:23:12 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ t_controller *create_controller(t_mlx_data *my_mlx)
 	controller->base.is_move_backward_pressed = mlx_is_move_backward;
 	controller->base.is_turn_left_pressed = mlx_is_turn_left;
 	controller->base.is_turn_right_pressed = mlx_is_turn_right;
+		// Set keys to zero if not already done in `mlx_init`
+	my_mlx->keys.left = 0;
+	my_mlx->keys.right = 0;
+	my_mlx->keys.w = 0;
+	my_mlx->keys.s = 0;
+
 	
 	return (t_controller *)controller;
 }

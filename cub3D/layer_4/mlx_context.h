@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 09:28:12 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:49:15 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define MLX_CONTEXT_H
 
 #include "../minilibx-linux/mlx.h"
+
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 #include <stdlib.h>
@@ -46,8 +47,17 @@ typedef struct s_mlx_data
 	t_key_state keys;
 }	t_mlx_data;
 
-int		close_window(t_mlx_data *screen);
-void	close_clean(t_mlx_data *screen);
+typedef struct s_game_context t_game_context;
+
+
+typedef struct s_mlx_game
+{
+	t_mlx_data		*my_mlx;
+	t_game_context	*ctx;
+}t_mlx_game;
+
+int		close_window(t_mlx_game *screen);
+void	close_clean(t_mlx_game *screen);
 
 int on_key_press(int keycode, void *param);
 int on_key_release(int keycode, void *param);

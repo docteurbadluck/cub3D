@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 10:48:15 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:34:13 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void update_vision(const t_player *player, const t_map *map, const t_displayer *
 	
 	raycast = raycasting_multiple(player, map);
 	framebuffer_init(raycast, &frame_buffer);
-	//free(raycast);
+	free(raycast);
 	display->display(display, &frame_buffer);
 }

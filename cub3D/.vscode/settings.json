@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"keysym.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"controller.h": "c",
+		"ranges": "c"
 	}
 }

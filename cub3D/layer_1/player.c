@@ -63,3 +63,12 @@ void player_print_state(const t_player *player)
 			player->pos_x,
 			player->camera_direction);
 }
+
+void init_player(t_player *A, int pos_x, int pos_y, double camera_direction)
+{
+	A->pos_x = pos_x;
+	A->pos_y = pos_y;
+	A->camera_direction = camera_direction;
+	A->rotation_speed = ROTATION_SPEED;
+	A->speed = SPEED;
+}

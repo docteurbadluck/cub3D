@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 10:47:42 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 11:27:12 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include "mlx_displayer.h"
 
 
-void	my_pixel_put(int x, int y, t_img *img, int color)
+void my_pixel_put(int x, int y, t_img *img, int color)
 {
-	int	offset;
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return;  // sécurité pour ne pas écrire hors de l'image
 
-	offset = (y * img->line_len) + (x * (img->bits_per_pixel / 8));
-	*(unsigned int *)(img ->img_pixels_ptr + offset) = color;
+	char *dst = img->img_pixels_ptr + (y * img->line_len + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
 void	background_render(int color_sky, int color_ground, t_mlx_data *my_mlx)
@@ -60,7 +61,8 @@ void mlx_display(const t_displayer *self, const t_framebuffer *frame_buff)
 
 	// Clear the image buffer
 	background_render(CYAN, YELLOW, displayer->mlx); 
-	
+	(void)frame_buff;
+	/*
 	// Example render loop: just vertical lines for each ray
 for (int i = 0; i < NBR_RAY; i++)
 {
@@ -79,7 +81,7 @@ for (int i = 0; i < NBR_RAY; i++)
     {
         my_pixel_put(x, y, &displayer->mlx->img, 0xFFFFFF);
     }
-}	
+}	*/
 }
 
 void mlx_clear_screen(const t_displayer *self)

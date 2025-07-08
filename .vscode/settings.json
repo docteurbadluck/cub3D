@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"player.h": "c",
+		"cstdlib": "c",
+		"mlx.h": "c",
+		"mlx_controller.h": "c",
+		"mlx_context.h": "c"
+	}
+}
