@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:22:53 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 14:10:26 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:04:38 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_ray_hit
 typedef struct s_framebuffer
 {
 	t_ray_hit	rays[NBR_RAY];
-	t_texture	texture;
 } t_framebuffer;
 
 

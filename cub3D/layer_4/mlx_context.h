@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 11:49:15 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 16:06:10 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		endian;
 	int		line_len;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_mlx_data

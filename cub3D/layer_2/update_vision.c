@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 14:14:14 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:02:33 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,15 @@ void framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 		i++;
 	}
 }
-void framebuffer_texture_init(t_framebuffer *framebuffer, const t_map *map)
-{
-	framebuffer->texture.sky_color = map->texture.sky_color;
-	framebuffer->texture.ground_color = map->texture.ground_color;
-}
 
-void update_vision(const t_player *player, const t_map *map, const t_displayer *display)
+
+void update_vision(const t_player *player, const t_map *map, t_displayer *display)
 {
 	t_raycast *raycast;
 	t_framebuffer frame_buffer;
 	
 	raycast = raycasting_multiple(player, map);
 	framebuffer_init(raycast, &frame_buffer);
-	framebuffer_texture_init(&frame_buffer, map);
+	free(raycast);
 	display->display(display, &frame_buffer);
 }

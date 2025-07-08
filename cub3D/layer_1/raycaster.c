@@ -52,6 +52,59 @@ static double normalize_angle(double angle)
 
 t_raycast raycasting(const t_player *player, const t_map *map)
 {
+    t_raycast raycast;
+    
+    raycast_init(player, map, &raycast);    
+
+	while (1)
+	{
+		if (raycast.side_dist_x < raycast.side_dist_y)
+		{
+			raycast.side_dist_x += raycast.delta_x;
+			raycast.case_x += raycast.step_x;
+			raycast.side = 0; // vertical wall
+		}
+		else 
+		{
+			raycast.side_dist_y += raycast.delta_y;
+			raycast.case_y += raycast.step_y;
+			raycast.side = 1; // horizontal wall
+		}
+		if (map->grid[raycast.case_y][raycast.case_x] != 0)
+			break;
+	}
+
+	if (raycast.side == 0)
+	{
+		raycast.distance = ((raycast.case_x - (raycast.pos_x / map->size_of_block)) + (1 - raycast.step_x) / 2 ) * raycast.delta_x;
+
+        // hit_x is known: x coordinate of the wall
+        double wall_x = raycast.case_x * map->size_of_block;
+        if (raycast.step_x < 0)
+            wall_x += map->size_of_block;  // hit left side of the block
+		// Compute hit_y from the ray equation
+		raycast.hit_x = wall_x;
+		raycast.hit_y = raycast.pos_y + raycast.distance * raycast.dir_y;
+	}
+	else
+	{
+		raycast.distance = ((raycast.case_y - (raycast.pos_y / map->size_of_block)) + (1 - raycast.step_y) / 2 ) * raycast.delta_y;
+
+		// hit_y is known: y coordinate of the wall
+		double wall_y = raycast.case_y * map->size_of_block;
+		if (raycast.step_y < 0)
+			wall_y += map->size_of_block;  // hit top side of the block
+
+        // Compute hit_x from the ray equation
+		raycast.hit_y = wall_y;
+		raycast.hit_x = raycast.pos_x + raycast.distance * raycast.dir_x;
+	}
+	raycast.distance = fabs(raycast.distance);
+	return raycast;
+}
+/*
+t_raycast raycasting(const t_player *player, const t_map *map)
+{
 	t_raycast raycast;
 	
 	raycast_init(player, map, &raycast);	
@@ -73,6 +126,8 @@ t_raycast raycasting(const t_player *player, const t_map *map)
 		if (map->grid[raycast.case_y][raycast.case_x] != 0)
 			break;
 	}
+
+
 	if (raycast.side == 0)	
 		raycast.distance = ((raycast.case_x - (raycast.pos_x / map->size_of_block)) + (1 - raycast.step_x) / 2 ) * raycast.delta_x;
 	else
@@ -80,7 +135,7 @@ t_raycast raycasting(const t_player *player, const t_map *map)
 
 	raycast.distance = fabs(raycast.distance);
 	return raycast;
-}
+}*/
 
 
 t_raycast *raycasting_multiple(const t_player *player, const t_map *map)

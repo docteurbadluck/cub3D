@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 09:05:11 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:02:19 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 #include "../layer_3/displayer.h"
 
 
-void update_vision(const t_player *player, const t_map *map, const t_displayer *display);
+void update_vision(const t_player *player, const t_map *map,  t_displayer *display);
 
 #endif

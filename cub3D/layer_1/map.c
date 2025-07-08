@@ -61,11 +61,3 @@ t_map	*init_map(int height, int width, int size_of_block, int **grid)
 	m->grid = grid;
 	return m;
 }
-
-void init_map_texture(t_map *map, int sky_color, int ground_color)
-{
-	map->texture.sky_color = sky_color;
-	map->texture.ground_color = ground_color;
-}
-
-

@@ -6,12 +6,11 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:46:50 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 14:09:20 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:53:19 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_context.h"
-
 
 # define CYAN        0x00FFFF
 # define YELLOW      0xFFFF00
@@ -63,15 +62,33 @@ int main()
 	mlx_hook(my_mlx.win_ptr, 3, 1L << 1, on_key_release, &all); // KeyRelease event
 	mlx_hook(my_mlx.win_ptr, 17, 0, close_window, &all);
 
+
+
 	my_controller = create_controller(&my_mlx);
+
+
 	my_displayer = create_displayer(&my_mlx);
+	init_displayer_texture(my_displayer, "./texture/stone_wall.xpm",CYAN, YELLOW);
+	
 	init_player(&ctx.player, 15, 15, 0.0);
 	ctx.map = init_map(10, 10, 10, grid);
-	init_map_texture(ctx.map, CYAN, YELLOW);
 	
+	
+	
+/*	
+ctx.map->texture.first_texture.img = mlx_xpm_file_to_image(
+	my_mlx.mlx_ptr,
+	"./texture/stone_wall.xpm",
+	&ctx.map->texture.first_texture.width,
+	&ctx.map->texture.first_texture.height);
+	ctx.map->texture.first_texture.addr = mlx_get_data_addr(ctx.map->texture.first_texture.img, &ctx.map->texture.first_texture.bpp,
+			&ctx.map->texture.first_texture.line_length, &ctx.map->texture.first_texture.endian);
+*/
+			
 	ctx.controller = my_controller;
 	ctx.displayer = my_displayer;
 	mlx_loop_hook(my_mlx.mlx_ptr, game_loop, &ctx);
 	mlx_loop(my_mlx.mlx_ptr);
+	
 	return 0;
 }

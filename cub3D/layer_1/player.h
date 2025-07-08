@@ -5,8 +5,8 @@
 #include <math.h>
 #include "map.h"
 
-#define SPEED 0.2
-#define ROTATION_SPEED (M_PI/180)
+#define SPEED 0.4
+#define ROTATION_SPEED (M_PI/90)
 
 typedef struct s_player
 {

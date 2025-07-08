@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 09:17:08 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:00:04 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ typedef struct s_mlx_displayer
 {
 	t_displayer		base;
 	t_mlx_data		*mlx;
+	t_img			first_texture;
+	int				sky_color;
+	int				ground_color;
 }	t_mlx_displayer;
 
 
 t_displayer	*create_displayer(t_mlx_data *mlx);
+void		init_displayer_texture(t_displayer *displayer, const char *filepath, int sky_color, int ground_color);
