@@ -17,37 +17,33 @@ HEADERS = layer_1/map.h layer_1/player.h layer_1/raycaster.h \
 	layer_4/mlx_context.h layer_4/mlx_controller.h layer_4/mlx_displayer.h
 
 BUILD_DIR = build
-# Liste des fichiers objets avec le répertoire build
-OBJ_FILES = $(SRC:srcs/%.c=$(BUILD_DIR)/%.o)
-
+OBJ_FILES = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC))
 NAME = $(BUILD_DIR)/cub3d
 
-# Règle par défaut pour créer l'exécutable
-all: lib create-dir $(NAME) 
+# Default target
+all: lib create-dir $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBX) $(LIBFT) -o $(NAME)
 
-# Règle pour compiler un fichier .c en .o dans build/
-$(BUILD_DIR)/%.o: srcs/%.c $(HEADERS)
-	$(CC) -c $< -o $@
+# Compile .c files to .o inside build/
+$(BUILD_DIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Nettoyage des fichiers objets dans build/
 lib:
 	@make -C libft > /dev/null 2>&1
 	@make -C minilibx-linux > /dev/null 2>&1
-	
+
 create-dir:
-	mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
 
 clean:
 	rm -f $(OBJ_FILES)
 
-# Nettoyage complet (objets + exécutable dans build/)
 fclean: clean
 	rm -f $(NAME)
 
-# Rebuild complet
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re lib create-dir
