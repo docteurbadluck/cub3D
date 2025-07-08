@@ -1,0 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 10:46:50 by tdeliot           #+#    #+#             */
+/*   Updated: 2025/07/08 10:48:41 by tdeliot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+int **create_grid(int height, int width)
+{
+	int	**grid;
+
+		grid = malloc(sizeof(int *) * height);
+		for (int y = 0; y < height; y++)
+	{
+		grid[y] = malloc(sizeof(int) * width);
+		for (int x = 0; x < width; x++)
+		{
+			if (y == 0 || y == height - 1 || x == 0 || x == width - 1)
+				grid[y][x] = 1;
+			else
+				grid[y][x] = 0;
+		}
+	}
+	return grid;
+}
+
+typedef struct s_game_context {
+	t_player		player;
+	t_map			*map;
+	t_controller	*controller;
+	t_displayer		*displayer;
+} t_game_context;
+
+int game_loop(void *param)
+{
+	t_game_context *ctx = (t_game_context *)param;
+
+	update_player(&ctx->player, ctx->controller, ctx->map);
+	player_print_state(&ctx->player);
+	update_vision(&ctx->player, ctx->map, ctx->displayer);
+	return (0);
+}
+
+int main()
+{
+	t_mlx_data		my_mlx;
+	t_controller	*my_controller;
+	t_displayer		*my_displayer;
+	t_game_context	ctx;
+	int				**grid;
+
+	grid = create_grid(10,10);
+
+	init_mlx(&my_mlx);
+	my_controller = create_controller(&my_mlx);
+	my_displayer = create_displayer(&my_mlx);
+	init_player(&ctx.player, 15, 15, 0.0);
+	ctx.map = init_map(10, 10, 10, grid);
+	ctx.controller = my_controller;
+	ctx.displayer = my_displayer;
+
+	mlx_loop_hook(my_mlx.mlx_ptr, game_loop, &ctx);
+	mlx_loop(my_mlx.mlx_ptr);
+	return 0;
+}
