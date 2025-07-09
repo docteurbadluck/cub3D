@@ -19,38 +19,6 @@ int map_is_wall(const t_map *map, double pos_x, double pos_y)
 	return 0;
 }
 
-
-void map_print(const t_map *m)
-{
-    for (int y = 0; y < m->height; y++) {
-        for (int x = 0; x < m->width; x++) {
-            if (m->grid[y][x] == 1)
-                printf("#");
-            else
-                printf(".");
-        }
-        printf("\n");
-    }
-}
-
-void map_print_with_player(t_map *m, double px, double py)
-{
-    int player_x = px / m->size_of_block;
-    int player_y = py / m->size_of_block;
-
-    for (int y = 0; y < m->height; y++) {
-        for (int x = 0; x < m->width; x++) {
-            if (x == player_x && y == player_y)
-                printf("P");
-            else if (m->grid[y][x] == 1)
-                printf("#");
-            else
-                printf(".");
-        }
-        printf("\n");
-    }
-}
-
 t_map	*init_map(int height, int width, int size_of_block, int **grid)
 {
 	t_map *m = malloc(sizeof(t_map));
