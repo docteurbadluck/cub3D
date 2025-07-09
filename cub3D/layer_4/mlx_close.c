@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 13:05:16 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/09 08:50:37 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	free_map_grid(t_map *map)
 //(display is the connection beetween the server x and the program)
 void	close_clean(t_mlx_game *screen)
 {
+	t_mlx_displayer *ptr = (t_mlx_displayer *)screen->ctx->displayer;
+	
+	mlx_destroy_image(screen->my_mlx->mlx_ptr, ptr->first_texture.img_ptr);
 	free(screen->ctx->controller);
 	free(screen->ctx->displayer);
 	free_map_grid(screen->ctx->map);

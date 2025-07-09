@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 17:02:33 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/09 09:41:59 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void update_vision(const t_player *player, const t_map *map, t_displayer *displa
 	framebuffer_init(raycast, &frame_buffer);
 	free(raycast);
 	display->display(display, &frame_buffer);
+	display->display_minimap(display, map, player);
 }

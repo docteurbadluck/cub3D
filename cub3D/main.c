@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:46:50 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 17:53:19 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/09 10:11:28 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ int game_loop(void *param)
 	t_game_context *ctx = (t_game_context *)param;
 
 	update_player(&ctx->player, ctx->controller, ctx->map);
-	player_print_state(&ctx->player);
+	//player_print_state(&ctx->player);
 	update_vision(&ctx->player, ctx->map, ctx->displayer);
 	
 	return (0);
 }
 
+
+//init map should : init player, init map, init texture for displayer. color for displayer/
 int main()
 {
 	t_mlx_game		all;
@@ -52,6 +54,12 @@ int main()
 	t_displayer		*my_displayer;
 	t_game_context	ctx;
 	int				**grid;
+	char *pathnames[] = {
+	"./texture/stone_wall.xpm",
+	"./texture/planks.xpm",
+	"./texture/paving.xpm",
+	"./texture/stone.xpm"
+};
 
 	all.ctx = &ctx;
 	all.my_mlx = &my_mlx;
@@ -68,23 +76,11 @@ int main()
 
 
 	my_displayer = create_displayer(&my_mlx);
-	init_displayer_texture(my_displayer, "./texture/stone_wall.xpm",CYAN, YELLOW);
+	init_displayer_color(my_displayer,CYAN, YELLOW);
+	init_displayer_multiple_texture(my_displayer, pathnames);
 	
 	init_player(&ctx.player, 15, 15, 0.0);
 	ctx.map = init_map(10, 10, 10, grid);
-	
-	
-	
-/*	
-ctx.map->texture.first_texture.img = mlx_xpm_file_to_image(
-	my_mlx.mlx_ptr,
-	"./texture/stone_wall.xpm",
-	&ctx.map->texture.first_texture.width,
-	&ctx.map->texture.first_texture.height);
-	ctx.map->texture.first_texture.addr = mlx_get_data_addr(ctx.map->texture.first_texture.img, &ctx.map->texture.first_texture.bpp,
-			&ctx.map->texture.first_texture.line_length, &ctx.map->texture.first_texture.endian);
-*/
-			
 	ctx.controller = my_controller;
 	ctx.displayer = my_displayer;
 	mlx_loop_hook(my_mlx.mlx_ptr, game_loop, &ctx);
