@@ -1,13 +1,12 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_displayer_init.c                               :+:      :+:    :+:   */
+/*   mlx_displayer_tool.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 17:13:00 by tdeliot          ###   ########.fr       */
+/*   Created: 2025/07/10 08:29:26 by tdeliot           #+#    #+#             */
+/*   Updated: 2025/07/10 08:31:35 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +14,12 @@
 
 void	my_pixel_put(int x, int y, t_img *img, int color)
 {
+	char	*dst;
+
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
-	char *dst = img->img_pixels_ptr + (y * img->line_len + x * (img->bits_per_pixel / 8));
+	dst = img->img_pixels_ptr + 
+		(y * img->line_len + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -29,21 +31,17 @@ void	background_render(int color_sky, int color_ground, t_mlx_data *my_mlx)
 	y = 0;
 	while (y < HEIGHT / 2)
 	{
-		x = 0;
-		while (x < WIDTH)
-		{
+		x = -1;
+		while (++x < WIDTH)
 			my_pixel_put(x, y, &my_mlx->img, color_sky);
-			x++;
-		}
 		y++;
 	}
-	while (y < HEIGHT )
+	while (y < HEIGHT)
 	{
-		x = 0;
-		while (x < WIDTH)
+		x = -1;
+		while (++x < WIDTH)
 		{
-			my_pixel_put(x, y,  &my_mlx->img, color_ground);
-			x++;
+			my_pixel_put(x, y, &my_mlx->img, color_ground);
 		}
 		y++;
 	}
