@@ -6,13 +6,13 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 11:10:19 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:32:47 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../mlx_main/mlx_context.h"
-#include "../game_context.h"
-#include "../mlx_controller.h"
+#include "mlx_context.h"
+#include "game_context.h"
+#include "mlx_controller.h"
 
 void	on_moove_key_press(int keycode, t_mlx_controller *controller_ctx);
 void	on_rotate_key_press(int keycode, t_mlx_controller *controller_ctx);

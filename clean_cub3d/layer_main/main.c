@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:34:40 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 11:54:01 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 14:04:14 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,33 @@ int **create_grid(int height, int width)
 }
 int main()
 {
-	t_mlx_game game;
-	t_init_data init_data;
-	int **grid;
-	char *pathnames[] = {
-	"../layer_5/texture/stone_wall.xpm",
-	"../layer_5/planks.xpm",
-	"../layer_5/paving.xpm",
-	"../layer_5/stone.xpm"
-};
-
+	t_mlx_game	game;
+	t_init_data	init_data;
 	
+	int **grid;
+	char *pathnames[] =
+	{
+	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/stone_wall.xpm",
+	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/planks.xpm",
+	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/paving.xpm",
+	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/stone.xpm",
+	NULL
+	};
+
+
 	init_data.player_pos_x = 15;
 	init_data.player_pos_y = 15;
 	init_data.camera_direction = 0.0;
 	
 	init_data.map_height = 10;
-	init_data.map_height = 10;
-	grid = create_grid(init_data.map_height, init_data.map_width); // to replace by the reel map 
+	init_data.map_width = 10;
+	grid = create_grid(init_data.map_height, init_data.map_width); // to replace by the reel map
 	init_data.grid = grid;
 
 	init_data.sky_color = CYAN;
 	init_data.ground_color = YELLOW;
 	init_data.textures_paths = pathnames;
 	
-	START_GAME(&game, &init_data);
+	start_game(&game, &init_data);
 	return 0;
 }

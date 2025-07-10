@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 10:39:59 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:37:45 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	draw_the_line(const t_mlx_displayer *displayer, t_line_to_display *line_to_
 	screen_x = (i * WIDTH / NBR_RAY);
 	while (y < line_to_display->draw_end)
 	{
-		init_line_to_draw_y_texture(displayer, line_to_display, y);
-		init_line_to_draw_pixel_color(&line_to_display);
+		init_line_to_draw_y_texture( line_to_display, y);
+		init_line_to_draw_pixel_color(line_to_display);
 		my_pixel_put(screen_x, y, &displayer->mlx->img, line_to_display->color);
 		++y;
 	}

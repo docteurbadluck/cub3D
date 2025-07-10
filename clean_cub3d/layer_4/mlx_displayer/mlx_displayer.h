@@ -6,12 +6,15 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 08:04:05 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:39:03 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../layer_3/interface_displayer.h"
-#include "mlx_context.h"
+#ifndef MLX_DISPLAYER_H
+# define MLX_DISPLAYER_H
+
+# include "interface_displayer.h"
+# include "mlx_context.h"
 
 typedef struct s_mlx_displayer
 {
@@ -34,3 +37,9 @@ void mlx_display_minimap(const t_i_displayer *self, const t_map *map, const t_pl
 
 //	***mlx_display_env***
 void mlx_display_env(const t_i_displayer *self, const t_framebuffer *frame_buff);
+
+//	***mlx_diplayer_tool***
+void	my_pixel_put(int x, int y, t_img *img, int color);
+void	background_render(int color_sky, int color_ground, t_mlx_data *my_mlx);
+
+#endif

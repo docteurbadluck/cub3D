@@ -6,12 +6,12 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:12:46 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 11:13:05 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:26:26 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx_main/mlx_context.h"
-#include "../../layer_3/interface_controller.h"
+#include "mlx_context.h"
+#include "interface_controller.h"
 
 typedef struct s_key_state
 {
@@ -41,8 +41,8 @@ int				mlx_is_turn_left(void *self);
 int				mlx_is_turn_right(void *self);
 
 //	***mlx_input***
-int		on_key_press(int keycode, void *param);
-int		on_key_release(int keycode, void *param);
+int				on_key_press(int keycode, void *param);
+int				on_key_release(int keycode, void *param);
 
 //	***mlx_init_controller***
 t_i_controller	*create_controller(t_mlx_data *my_mlx);

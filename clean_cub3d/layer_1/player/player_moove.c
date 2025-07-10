@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:48:44 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 10:58:12 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:20:47 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	player_move_forward(t_player *player, const t_map *map)
 		player->pos_y = new_y;
 }
 
-void	player_move_forward(t_player *player, const t_map *map)
+void	player_move_backward(t_player *player, const t_map *map)
 {
 	double	dx;
 	double	dy;

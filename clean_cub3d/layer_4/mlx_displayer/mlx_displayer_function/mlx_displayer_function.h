@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:04:16 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 10:35:26 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:37:28 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ typedef struct s_line_to_display
 void	init_line_to_draw_boundary(t_line_to_display *line_to_display, const t_framebuffer *frame_buff, int i);
 void	init_line_to_draw_texture(t_line_to_display *line_to_display, const t_framebuffer *frame_buff, const t_mlx_displayer *displayer, int i);
 void	init_line_to_draw_x_texture(t_line_to_display *line_to_display, const t_framebuffer *frame_buff, int i);
-void	init_line_to_draw_y_texture(const t_mlx_displayer *dispayer, t_line_to_display *line_to_display, int y);
+void	init_line_to_draw_y_texture(t_line_to_display *line_to_display, int y);
 void	init_line_to_draw_pixel_color(t_line_to_display *line_to_display);

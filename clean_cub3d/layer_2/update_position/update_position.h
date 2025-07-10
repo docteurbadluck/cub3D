@@ -6,16 +6,16 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 15:27:02 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:24:59 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UPDATE_POSITION_H
 # define UPDATE_POSITION_H
 
-# include "../../layer_1/player/player.h"
-# include "../../layer_1/map/map.h"
-# include "../../layer_3/interface_controller.h" 
+# include "player.h"
+# include "map.h"
+# include "interface_controller.h" 
 
 // The idea here is to connect the use case to entyties in a side,
 // and on the other side, connect to an interface.

@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:54:59 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 12:57:40 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 13:20:56 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_raycast	*raycasting_multiple(const t_player *player, const t_map *map)
 	int					i;
 
 	i = 0;
-	rays = malloc(sizeof(t_raycast) * NBR_RAY);:
+	rays = malloc(sizeof(t_raycast) * NBR_RAY);
 	if (!rays)
 		return (NULL);
 	caster.angle_step = player->fov / NBR_RAY;
