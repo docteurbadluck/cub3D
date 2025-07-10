@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:46:50 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 10:11:28 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 11:36:14 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ int main()
 	all.my_mlx = &my_mlx;
 	
 	grid = create_grid(10,10);
-	init_mlx(&my_mlx);
-	mlx_hook(my_mlx.win_ptr, 2, 1L << 0, on_key_press, &all);   // KeyPress event
-	mlx_hook(my_mlx.win_ptr, 3, 1L << 1, on_key_release, &all); // KeyRelease event
-	mlx_hook(my_mlx.win_ptr, 17, 0, close_window, &all);
+	//init_mlx(&my_mlx);
+//	mlx_hook(my_mlx.win_ptr, 2, 1L << 0, on_key_press, &all);   // KeyPress event
+//	mlx_hook(my_mlx.win_ptr, 3, 1L << 1, on_key_release, &all); // KeyRelease event
+//	mlx_hook(my_mlx.win_ptr, 17, 0, close_window, &all);
+//
+//
 
-
-
-	my_controller = create_controller(&my_mlx);
+//	my_controller = create_controller(&my_mlx);
 
 
 	my_displayer = create_displayer(&my_mlx);
@@ -83,6 +83,8 @@ int main()
 	ctx.map = init_map(10, 10, 10, grid);
 	ctx.controller = my_controller;
 	ctx.displayer = my_displayer;
+
+	
 	mlx_loop_hook(my_mlx.mlx_ptr, game_loop, &ctx);
 	mlx_loop(my_mlx.mlx_ptr);
 	

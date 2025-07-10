@@ -3,6 +3,7 @@
 		"map.h": "c",
 		"player.h": "c",
 		"ranges": "c",
-		"mlx_displayer_function.h": "c"
+		"mlx_displayer_function.h": "c",
+		"mlx_displayer.h": "c"
 	}
 }

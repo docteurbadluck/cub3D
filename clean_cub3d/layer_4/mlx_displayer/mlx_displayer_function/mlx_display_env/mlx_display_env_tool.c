@@ -1,34 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_display_env.c                                  :+:      :+:    :+:   */
+/*   mlx_display_env_tool.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 10:00:53 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 10:40:06 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx_displayer.h"
-#include "mlx_displayer_function.h"
-
-
-typedef struct s_line_to_display
-{
-	int		draw_start;
-	int		draw_end;
-	int		line_height;
-	int		screen_x;
-
-	t_img	*texture;
-	int		texture_x;
-	int		texture_y;
-
-	char	*pixel;
-	int		color;
-}	t_line_to_display;
-
+#include "../mlx_displayer_function.h"
 
 // this function look at the size of the screen to calcule the lenght of the line to display.
 // draw start and draw end are the boundary of what we will draw.
@@ -87,13 +70,6 @@ void	init_line_to_draw_x_texture(t_line_to_display *line_to_display, const t_fra
 
 // the idea here is to find the y point of the texture that we want to render.
 // we start by scaling for precision and center it.
-/*
-2. - HEIGHT * 128 + line_height * 128:
-Centers the line vertically on screen:
-
-Imagine HEIGHT is 480. Half of that is 240.
-
-So we align the middle of the wall line to screen center.*/
 void	init_line_to_draw_y_texture(const t_mlx_displayer *dispayer, t_line_to_display *line_to_display, int y)
 {
 	int	d;
@@ -105,48 +81,12 @@ void	init_line_to_draw_y_texture(const t_mlx_displayer *dispayer, t_line_to_disp
 	if (line_to_display->texture_y > line_to_display->texture->height)
 		line_to_display->texture_y = line_to_display->texture->height -1;
 }
-
+// we use texture x and texture y to point on a pixel from the texture, 
+// we then look the color into it.
 void	init_line_to_draw_pixel_color(t_line_to_display *line_to_display)
 {
 		line_to_display->pixel = line_to_display->texture->img_pixels_ptr + 
 		line_to_display->texture_y * line_to_display->texture->line_len + 
 		line_to_display->texture_x * (line_to_display->texture->bits_per_pixel / 8); 
 		line_to_display->color = *(int *)line_to_display->pixel;
-}
-
-//for each pixel of the line, we are searching the correspondent into the texture that we defined.
-
-void	draw_the_line(const t_mlx_displayer *displayer, t_line_to_display *line_to_display, int i)
-{
-	int		screen_x;
-	int		y;
-
-	y = line_to_display->draw_start;
-	screen_x = (i * WIDTH / NBR_RAY);
-	while (y < line_to_display->draw_end)
-	{
-		init_line_to_draw_y_texture(displayer, line_to_display, y);
-		init_line_to_draw_pixel_color(&line_to_display);
-		my_pixel_put(screen_x, y, &displayer->mlx->img, line_to_display->color);
-		++y;
-	}
-}
-
-void	mlx_display_env(const t_i_displayer *self, const t_framebuffer *frame_buff)
-{
-	t_mlx_displayer		*displayer;
-	t_line_to_display	line_to_display;
-	int					i;
-
-	i = 0;
-	displayer = (t_mlx_displayer *)self;
-	background_render(displayer->sky_color, displayer->ground_color, displayer->mlx);
-	while (i < NBR_RAY)
-	{
-		init_line_to_draw_boundary(&line_to_display, frame_buff, i);
-		init_line_to_draw_texture(&line_to_display, frame_buff, displayer, i);
-		init_line_to_draw_x_texture(&line_to_display, frame_buff, i);
-		draw_the_line(displayer, &line_to_display, i);
-		i++;
-	}
 }

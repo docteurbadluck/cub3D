@@ -6,16 +6,16 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 17:07:03 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 11:10:19 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../mlx_main/mlx_context.h"
 #include "../game_context.h"
+#include "../mlx_controller.h"
 
 void	on_moove_key_press(int keycode, t_mlx_controller *controller_ctx);
 void	on_rotate_key_press(int keycode, t_mlx_controller *controller_ctx);
-
 
 //We change the logic here, the keys are stored in the
 // the controller and not in mlx anymore. 
@@ -31,10 +31,10 @@ int	on_key_press(int keycode, void *param)
 	mlx_game_ctx = param;
 	controller_ctx = mlx_game_ctx->game_context->controller->context;
 	on_moove_key_press(keycode, controller_ctx);
-	on_rotate_key_press(keycode,controller_ctx);
+	on_rotate_key_press(keycode, controller_ctx);
 	if (keycode == XK_Escape)
 		close_clean(mlx_game_ctx);
-	return 0;
+	return (0);
 }
 
 void	on_moove_key_press(int keycode, t_mlx_controller *controller_ctx)

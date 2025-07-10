@@ -6,15 +6,14 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 18:06:14 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 11:53:52 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_CONTEXT_H
 #define MLX_CONTEXT_H
 
-#include "../minilibx-linux/mlx.h"
-
+#include "../layer_5/lib/minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 #include <stdlib.h>
@@ -39,7 +38,6 @@ typedef struct s_mlx_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_img	img;
-	t_key_state keys;
 }	t_mlx_data;
 
 typedef struct s_game_context t_game_context;
@@ -54,7 +52,7 @@ typedef struct s_mlx_game
 int		close_window(t_mlx_game *screen);
 void	close_clean(t_mlx_game *screen);
 
-void init_mlx(t_mlx_data *my_mlx);
+void	init_mlx(t_mlx_data *my_mlx);
 
 
 #endif
