@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:12:46 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:26:26 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 14:31:14 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_mlx_controller
 	t_key_state		keys;
 	t_mlx_data		*mlx;
 }	t_mlx_controller;
+
 
 //	***mlx_move***
 int				mlx_is_move_forward(void *self);

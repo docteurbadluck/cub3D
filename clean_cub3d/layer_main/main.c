@@ -6,11 +6,11 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:34:40 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 14:04:14 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 14:48:31 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../layer_4/game/game_context.h"
+#include "mlx_context.h"
 
 # define CYAN			0x00FFFF
 # define YELLOW			0xFFFF00

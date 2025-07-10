@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:26:52 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 14:44:00 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define MLX_CONTEXT_H
 
 #include "mlx.h"
+#include "game_context.h"
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
 #include <stdlib.h>
@@ -40,9 +41,6 @@ typedef struct s_mlx_data
 	t_img	img;
 }	t_mlx_data;
 
-typedef struct s_game_context t_game_context;
-
-
 typedef struct s_mlx_game
 {
 	t_mlx_data		*my_mlx;
@@ -53,6 +51,5 @@ int		close_window(t_mlx_game *screen);
 void	close_clean(t_mlx_game *screen);
 
 void	init_mlx(t_mlx_data *my_mlx);
-
 
 #endif
