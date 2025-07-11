@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 12:31:30 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 16:48:42 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,23 @@ void	init_line_to_draw_x_texture(t_line_to_display *line_to_display,
 	double	wall_x;
 
 	if (frame_buff->rays[i].side == 0)
-		wall_x = fmod(frame_buff->rays[i].hit_y, SIZE_OF_BLOCK);
+		wall_x = frame_buff->rays[i].hit_y;
 	else
-		wall_x = fmod(frame_buff->rays[i].hit_x, SIZE_OF_BLOCK);
-	wall_x /= SIZE_OF_BLOCK;
+		wall_x = frame_buff->rays[i].hit_x;
+
+	wall_x = fmod(wall_x, SIZE_OF_BLOCK);
+	if (wall_x < 0)
+		wall_x += SIZE_OF_BLOCK;
+	wall_x /= SIZE_OF_BLOCK;  // Normalize to [0.0, 1.0)
 
 	line_to_display->texture_x = (int)(wall_x * line_to_display->texture->width);
+	
 	// Clamp
 	if (line_to_display->texture_x < 0)
 		line_to_display->texture_x = 0;
 	if (line_to_display->texture_x >= line_to_display->texture->width)
 		line_to_display->texture_x = line_to_display->texture->width - 1;
 }
-/*void	init_line_to_draw_x_texture(t_line_to_display *line_to_display, const t_framebuffer *frame_buff, int i)
-{
-	double	wall_x;
-
-	if (frame_buff->rays[i].side == 0)
-		wall_x = frame_buff->rays[i].hit_x;
-	else
-		wall_x = frame_buff->rays[i].hit_y;
-	wall_x -= floor(wall_x); 
-	
-	line_to_display->texture_x = (int)(wall_x * line_to_display->texture->width);
-	if (line_to_display->texture_x < 0)
-		line_to_display->texture_x = 0;
-	if (line_to_display->texture_x >= line_to_display->texture->width)
-		line_to_display->texture_x = line_to_display->texture->width -1;
-}*/
-
-
 // the idea here is to find the y point of the texture that we want to render.
 // we start by scaling for precision and center it.
 void	init_line_to_draw_y_texture(t_line_to_display *line_to_display, int y)
@@ -106,6 +93,7 @@ void	init_line_to_draw_y_texture(t_line_to_display *line_to_display, int y)
 // we then look the color into it.
 void	init_line_to_draw_pixel_color(t_line_to_display *line_to_display)
 {
+	
 		line_to_display->pixel = line_to_display->texture->img_pixels_ptr + 
 		line_to_display->texture_y * line_to_display->texture->line_len + 
 		line_to_display->texture_x * (line_to_display->texture->bits_per_pixel / 8); 

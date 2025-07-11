@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:37:45 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 16:57:48 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	mlx_display_env(const t_i_displayer *self, const t_framebuffer *frame_buff)
 	int					i;
 
 	i = 0;
+	printf("%.2f \n", frame_buff->rays[400].hit_x);
 	displayer = (t_mlx_displayer *)self;
 	background_render(displayer->sky_color, displayer->ground_color, displayer->mlx);
 	while (i < NBR_RAY)

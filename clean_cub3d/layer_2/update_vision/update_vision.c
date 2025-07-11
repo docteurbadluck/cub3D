@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 12:13:39 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 15:16:50 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,15 @@ void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 	{
 		frame_buffer->rays[i].distance = raycast[i].distance;
 		frame_buffer->rays[i].side = raycast[i].side;
+		
 		frame_buffer->rays[i].hit_x = raycast[i].hit_x;
+		if (frame_buffer->rays[i].hit_x < 0)
+			frame_buffer->rays[i].hit_x = 0;
 		frame_buffer->rays[i].hit_y = raycast[i].hit_y;
+		if (frame_buffer->rays[i].hit_y < 0)
+			frame_buffer->rays[i].hit_y = 0;
+		frame_buffer->rays[i].dir_x = raycast[i].dir_x;
+		frame_buffer->rays[i].dir_y = raycast[i].dir_y;
 		if (raycast[i].side == 0 && raycast[i].dir_x > 0)
 			frame_buffer->rays[i].face = 'W';
 		else if (raycast[i].side == 0 && raycast[i].dir_x < 0)
@@ -57,7 +64,7 @@ void	update_vision(const t_player *player,
 	//printf("hit y : %.2f \n", raycast[0].hit_y);
 	usleep(20000);
 	framebuffer_init(raycast, &frame_buffer); // hit is negatif sometime 
-	//printf("ray info : distance : %.2f face : %c  hit x : %.2f hit_y : %.2f\n", frame_buffer.rays[0].distance, frame_buffer.rays[0].face, frame_buffer.rays[0].hit_x , frame_buffer.rays[0].hit_y);
+	printf("ray info : distance : %.2f face : %c  hit x : %.2f hit_y : %.2f\n", frame_buffer.rays[NBR_RAY/2].distance, frame_buffer.rays[NBR_RAY/2].face, frame_buffer.rays[NBR_RAY/2].hit_x , frame_buffer.rays[NBR_RAY/2].hit_y);
 	free(raycast);
 	display->display(display, &frame_buffer);
 	display->display_minimap(display, map, player);

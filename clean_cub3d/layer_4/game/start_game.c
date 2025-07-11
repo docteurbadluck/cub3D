@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:03:52 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 12:04:45 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 16:38:25 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	start_game(t_mlx_game	*GAME, t_init_data *init)
 	mlx_hook(GAME->my_mlx->win_ptr, 3, 1L << 1, on_key_release, GAME);
 	mlx_hook(GAME->my_mlx->win_ptr, 17, 0, close_window, GAME);
 	
-	GAME->game_context->controller = create_controller(GAME->my_mlx); // seems alright now 
-	GAME->game_context->displayer =										// seems alright
+	GAME->game_context->controller = create_controller(GAME->my_mlx);
+	GAME->game_context->displayer =
 		create_displayer(GAME->my_mlx,
 			init->textures_paths,
 			init->sky_color,
@@ -54,9 +54,8 @@ void	start_game(t_mlx_game	*GAME, t_init_data *init)
 			
 	GAME->game_context->player = malloc(sizeof(t_player));
 	init_player(GAME->game_context->player,
-		init->player_pos_x, init->player_pos_y, init->camera_direction);		//seems alright
-	GAME->game_context->map = init_map(init->map_height, init->map_width, SIZE_OF_BLOCK, init->grid); // was wrong also 
-	
+		init->player_pos_x, init->player_pos_y, init->camera_direction);
+	GAME->game_context->map = init_map(init->map_height, init->map_width, SIZE_OF_BLOCK, init->grid);
 	mlx_loop_hook(GAME->my_mlx->mlx_ptr, game_loop, GAME->game_context);
 	mlx_loop(GAME->my_mlx->mlx_ptr);
 }

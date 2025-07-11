@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:34:40 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 10:46:57 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 15:18:45 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int main()
 	int **grid;
 	char *pathnames[] =
 	{
-	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/stone_wall.xpm",
 	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/planks.xpm",
 	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/paving.xpm",
 	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/stone.xpm",
+	"/home/tdeliot/Desktop/cub3D/clean_cub3d/layer_5/texture/stone_wall.xpm",
+
 	NULL
 	};
 

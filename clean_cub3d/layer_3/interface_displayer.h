@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:22:53 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 11:25:56 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 14:41:50 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_ray_hit
 	double	hit_x;
 	double	hit_y;
 	char	face;
+	double	dir_x;
+	double	dir_y;
 }	t_ray_hit;
 
 typedef struct s_framebuffer

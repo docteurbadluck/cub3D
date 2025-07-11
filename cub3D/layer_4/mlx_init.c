@@ -6,12 +6,11 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:52:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/08 11:29:57 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 14:08:21 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_context.h"
-
 
 void init_mlx(t_mlx_data *my_mlx)
 {
