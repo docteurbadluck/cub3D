@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 15:27:14 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:13:39 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 // framebuffer which contain an array of t_ray_hit (which contain 5 field only).
 // this allow a better readability.
 // it alsow allow us to free the data allocated into the logic layer. 
+
 void	update_vision(const t_player *player,
 	const t_map *map, t_i_displayer *display)
 {
@@ -52,7 +53,11 @@ void	update_vision(const t_player *player,
 	t_framebuffer	frame_buffer;
 
 	raycast = raycasting_multiple(player, map);
-	framebuffer_init(raycast, &frame_buffer);
+	//printf("\n\nray info : distance : %.2f side : %d  hit x : %.2f ", raycast[0].distance,  raycast[0].side, raycast[0].hit_x);
+	//printf("hit y : %.2f \n", raycast[0].hit_y);
+	usleep(20000);
+	framebuffer_init(raycast, &frame_buffer); // hit is negatif sometime 
+	//printf("ray info : distance : %.2f face : %c  hit x : %.2f hit_y : %.2f\n", frame_buffer.rays[0].distance, frame_buffer.rays[0].face, frame_buffer.rays[0].hit_x , frame_buffer.rays[0].hit_y);
 	free(raycast);
 	display->display(display, &frame_buffer);
 	display->display_minimap(display, map, player);

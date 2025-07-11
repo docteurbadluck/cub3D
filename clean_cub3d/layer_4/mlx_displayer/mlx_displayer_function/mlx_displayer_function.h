@@ -6,14 +6,14 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 18:04:16 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:37:28 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 11:24:20 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mlx_displayer.h"
 
 //	***mlx_mininap***
-void mlx_display_minimap(const t_i_displayer *self, const t_map *map, const t_player *player);
+void mlx_display_minimap(t_i_displayer *self, const t_map *map, const t_player *player);
 
 //	***mlx_display_env***
 void mlx_display_env(const t_i_displayer *self, const t_framebuffer *frame_buff);

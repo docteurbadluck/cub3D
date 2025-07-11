@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:22:53 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:26:06 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 11:25:56 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_i_displayer
 {
 	void	(*display)(const struct s_i_displayer *self,
 			const t_framebuffer *frame_buff);
-	void	(*display_minimap)(const struct s_i_displayer *self,
+	void	(*display_minimap)(struct s_i_displayer *self,
 			const t_map *map, const t_player *player);
 }	t_i_displayer;
 

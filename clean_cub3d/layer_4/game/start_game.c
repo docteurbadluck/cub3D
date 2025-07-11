@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:03:52 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 14:53:45 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:04:45 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "mlx_controller.h"
 #include "mlx_displayer.h"
 #include "game_context.h"
-
+#include "update_position.h"
+#include "update_vision.h"
 #define SIZE_OF_BLOCK 10
 
 int	game_loop(void *param)
@@ -25,7 +26,8 @@ int	game_loop(void *param)
 	ctx = (t_game_context *)param;
 	
 	update_position(ctx->player, ctx->controller, ctx->map);
-	//update_vision(&ctx->player, ctx->map, ctx->displayer);
+	//player_print_state(ctx->player);
+	update_vision(ctx->player, ctx->map, ctx->displayer);
 	return (0);
 }
 
@@ -39,20 +41,22 @@ void	start_game(t_mlx_game	*GAME, t_init_data *init)
 		exit(1);
 	}
 	init_mlx(GAME->my_mlx);
-	mlx_hook(GAME->my_mlx->win_ptr, 2, 1L << 0, on_key_press, &GAME);
-	mlx_hook(GAME->my_mlx->win_ptr, 3, 1L << 1, on_key_release, &GAME);
-	mlx_hook(GAME->my_mlx->win_ptr, 17, 0, close_window, &GAME);
+	mlx_hook(GAME->my_mlx->win_ptr, 2, 1L << 0, on_key_press, GAME);
+	mlx_hook(GAME->my_mlx->win_ptr, 3, 1L << 1, on_key_release, GAME);
+	mlx_hook(GAME->my_mlx->win_ptr, 17, 0, close_window, GAME);
 	
-	GAME->game_context->controller = create_controller(GAME->my_mlx);
-	GAME->game_context->displayer = 
+	GAME->game_context->controller = create_controller(GAME->my_mlx); // seems alright now 
+	GAME->game_context->displayer =										// seems alright
 		create_displayer(GAME->my_mlx,
 			init->textures_paths,
 			init->sky_color,
 			init->ground_color);
+			
 	GAME->game_context->player = malloc(sizeof(t_player));
 	init_player(GAME->game_context->player,
-		init->player_pos_x, init->player_pos_y, init->camera_direction);
-	init_map(init->map_height, init->map_width, SIZE_OF_BLOCK, init->grid);
+		init->player_pos_x, init->player_pos_y, init->camera_direction);		//seems alright
+	GAME->game_context->map = init_map(init->map_height, init->map_width, SIZE_OF_BLOCK, init->grid); // was wrong also 
+	
 	mlx_loop_hook(GAME->my_mlx->mlx_ptr, game_loop, GAME->game_context);
 	mlx_loop(GAME->my_mlx->mlx_ptr);
 }

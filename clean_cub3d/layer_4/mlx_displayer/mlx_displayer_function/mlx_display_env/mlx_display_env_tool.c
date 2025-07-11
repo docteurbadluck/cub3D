@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:36:44 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:31:30 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ void	init_line_to_draw_boundary(t_line_to_display *line_to_display, const t_fram
 	line_height = (int)(HEIGHT / dist);
 	line_to_display->line_height = line_height;
 	line_to_display->draw_start = (HEIGHT - line_height) / 2;
-	line_to_display->draw_end = (HEIGHT - line_height) / 2;
+	line_to_display->draw_end = (HEIGHT + line_height) / 2;
 	if (line_to_display->draw_start < 0)
 		line_to_display->draw_start = 0;
 	if (line_to_display->draw_end > HEIGHT)
 		line_to_display->draw_end = HEIGHT;
+	//printf("line to draw boundary : draw start %d draw end %d\n", line_to_display->draw_start, line_to_display->draw_end);
 }
 
 // this function decide which texture is drawn on the line.
@@ -50,7 +51,27 @@ void	init_line_to_draw_texture(t_line_to_display *line_to_display, const t_frame
 // for that we look were the point touch the wall. (4.5), we keep the .5, then we 
 // look the corresponding point in the texture, (in this case texture->width* 0.5)
 // we then verify that it's not out boundary by security. 
-void	init_line_to_draw_x_texture(t_line_to_display *line_to_display, const t_framebuffer *frame_buff, int i)
+#define SIZE_OF_BLOCK 10
+
+void	init_line_to_draw_x_texture(t_line_to_display *line_to_display,
+									const t_framebuffer *frame_buff, int i)
+{
+	double	wall_x;
+
+	if (frame_buff->rays[i].side == 0)
+		wall_x = fmod(frame_buff->rays[i].hit_y, SIZE_OF_BLOCK);
+	else
+		wall_x = fmod(frame_buff->rays[i].hit_x, SIZE_OF_BLOCK);
+	wall_x /= SIZE_OF_BLOCK;
+
+	line_to_display->texture_x = (int)(wall_x * line_to_display->texture->width);
+	// Clamp
+	if (line_to_display->texture_x < 0)
+		line_to_display->texture_x = 0;
+	if (line_to_display->texture_x >= line_to_display->texture->width)
+		line_to_display->texture_x = line_to_display->texture->width - 1;
+}
+/*void	init_line_to_draw_x_texture(t_line_to_display *line_to_display, const t_framebuffer *frame_buff, int i)
 {
 	double	wall_x;
 
@@ -65,7 +86,7 @@ void	init_line_to_draw_x_texture(t_line_to_display *line_to_display, const t_fra
 		line_to_display->texture_x = 0;
 	if (line_to_display->texture_x >= line_to_display->texture->width)
 		line_to_display->texture_x = line_to_display->texture->width -1;
-}
+}*/
 
 
 // the idea here is to find the y point of the texture that we want to render.
@@ -78,7 +99,7 @@ void	init_line_to_draw_y_texture(t_line_to_display *line_to_display, int y)
 	line_to_display->texture_y = ((d * line_to_display->texture->height) / line_to_display->line_height) / 256;
 	if (line_to_display->texture_y < 0)
 		line_to_display->texture_y = 0;
-	if (line_to_display->texture_y > line_to_display->texture->height)
+	if (line_to_display->texture_y >= line_to_display->texture->height)
 		line_to_display->texture_y = line_to_display->texture->height -1;
 }
 // we use texture x and texture y to point on a pixel from the texture, 

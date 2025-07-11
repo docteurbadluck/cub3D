@@ -6,12 +6,13 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:12:46 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 14:31:14 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 08:23:49 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_context.h"
 #include "interface_controller.h"
+#include <stdio.h>
 
 typedef struct s_key_state
 {

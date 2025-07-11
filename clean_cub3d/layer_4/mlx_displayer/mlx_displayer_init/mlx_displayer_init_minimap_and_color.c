@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 08:23:24 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 11:19:24 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	init_displayer_minimap(t_mlx_displayer *my_displayer)
 	my_displayer->minimap_img.img_ptr = 
 		mlx_new_image(my_displayer->mlx->mlx_ptr,
 			MINIMAP_WIDTH, MINIMAP_HEIGHT);
+	my_displayer->minimap_img.height = MINIMAP_HEIGHT;
+	my_displayer->minimap_img.width = MINIMAP_WIDTH;
 	my_displayer->minimap_img.img_pixels_ptr = mlx_get_data_addr(
 			my_displayer->minimap_img.img_ptr,
 			&my_displayer->minimap_img.bits_per_pixel,

@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 11:56:24 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 12:49:45 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:13:18 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	raycasting_send_a_ray(t_raycast *r, const t_map *map)
 		{
 			r->side_dist_y += r->delta_y;
 			r->case_y += r->step_y;
-			r->side = 0;
+			r->side = 1;
 		}
 		if (map->grid[r->case_y][r->case_x] != 0)
 			break ;
@@ -40,8 +40,8 @@ void	raycasting_send_a_ray(t_raycast *r, const t_map *map)
 
 //we recalcule the distance know that we now the position of the wall.
 // we also look where does hit the other y to know which part of the has been
-//hitted.
-void	raycasting_finalize_hit(t_raycast *r, int size_of_block)
+//hitted. 
+void	raycasting_finalize_hit(t_raycast *r, int size_of_block) 
 {
 	double	wall_x;
 	double	wall_y;

@@ -5,6 +5,7 @@
 		"ranges": "c",
 		"mlx_displayer_function.h": "c",
 		"mlx_displayer.h": "c",
-		"mlx_controller.h": "c"
+		"mlx_controller.h": "c",
+		"stdio.h": "c"
 	}
 }

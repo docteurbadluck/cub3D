@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:39:23 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/10 15:19:12 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	free_map_grid(t_map *map)
 		free(map->grid[y]);
 		y++;
 	}
-	free(map->grid);
-	map->grid = NULL;
+	//free(map->grid);
 }
 
 void	destroy_texture(t_mlx_displayer *ptr_displayer)
@@ -53,7 +52,7 @@ void	close_clean(t_mlx_game *GAME)
 	destroy_texture(ptr_displayer);
 	free(GAME->game_context->controller);
 	free(GAME->game_context->displayer);
-	free_map_grid(GAME->game_context->map);
+	//free_map_grid(GAME->game_context->map);
 	free(GAME->game_context->map);
 	mlx_destroy_image(GAME->my_mlx->mlx_ptr, GAME->my_mlx->img.img_ptr);
 	mlx_destroy_window(GAME->my_mlx->mlx_ptr, GAME->my_mlx->win_ptr);

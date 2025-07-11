@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:34:40 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 14:48:31 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 10:46:57 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int main()
 	init_data.camera_direction = 0.0;
 	
 	init_data.map_height = 10;
-	init_data.map_width = 10;
+	init_data.map_width = 12;
 	grid = create_grid(init_data.map_height, init_data.map_width); // to replace by the reel map
 	init_data.grid = grid;
 

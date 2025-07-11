@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:52:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:54:04 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/11 11:44:44 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	init_mlx(t_mlx_data *my_mlx)
 	if (!my_mlx->mlx_ptr)
 	{
 		printf("fail mlx_ptr\n");
-
 		exit(1);
 	}
 	my_mlx->win_ptr = mlx_new_window(my_mlx->mlx_ptr, WIDTH, HEIGHT, "cub3D");
