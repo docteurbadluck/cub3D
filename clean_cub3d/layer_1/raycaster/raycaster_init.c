@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 11:28:44 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/14 09:31:57 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:11:00 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,27 @@ void	raycast_init_delta(t_raycast *r, int size_of_block)
 // we divide it by dir x to have the distance beetween us and the  next wall.
 // we will do the next calculation on this variable.
 
-void	raycast_init_step_direction_and_side_dist(t_raycast *r, int size_of_block)
+void	raycast_init_step_direction_and_side_dist(t_raycast *r, int size_block)
 {
 	if (r->dir_x > 0)
 	{
 		r->step_x = 1;
-		r->side_dist_x = ((r->case_x + 1) * size_of_block - r->pos_x) / r->dir_x;
+		r->side_dist_x = ((r->case_x + 1) * size_block - r->pos_x) / r->dir_x;
 	}
 	else
 	{
 		r->step_x = -1;
-		r->side_dist_x = (r->pos_x - r->case_x * size_of_block) / -r->dir_x;
+		r->side_dist_x = (r->pos_x - r->case_x * size_block) / -r->dir_x;
 	}
-
 	if (r->dir_y > 0)
 	{
 		r->step_y = 1;
-		r->side_dist_y = ((r->case_y + 1) * size_of_block - r->pos_y) / r->dir_y;
+		r->side_dist_y = ((r->case_y + 1) * size_block - r->pos_y) / r->dir_y;
 	}
 	else
 	{
 		r->step_y = -1;
-		r->side_dist_y = (r->pos_y - r->case_y * size_of_block) / -r->dir_y;
+		r->side_dist_y = (r->pos_y - r->case_y * size_block) / -r->dir_y;
 	}
 }
 

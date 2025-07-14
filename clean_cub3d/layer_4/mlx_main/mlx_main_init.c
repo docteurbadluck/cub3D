@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:52:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 11:44:44 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:34:06 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 void	init_mlx_pixel_ptr(t_mlx_data *my_mlx)
 {
 	my_mlx->img.img_pixels_ptr = mlx_get_data_addr(
-		my_mlx->img.img_ptr,
-		&my_mlx->img.bits_per_pixel,
-		&my_mlx->img.line_len,
-		&my_mlx->img.endian
-	);
+			my_mlx->img.img_ptr,
+			&my_mlx->img.bits_per_pixel,
+			&my_mlx->img.line_len,
+			&my_mlx->img.endian);
 	if (!my_mlx->img.img_pixels_ptr)
 	{
 		mlx_destroy_image(my_mlx->mlx_ptr, my_mlx->img.img_ptr);
@@ -33,7 +32,6 @@ void	init_mlx_pixel_ptr(t_mlx_data *my_mlx)
 //init the mlx (screen image, window...)
 void	init_mlx(t_mlx_data *my_mlx)
 {
-	
 	my_mlx->mlx_ptr = mlx_init();
 	if (!my_mlx->mlx_ptr)
 	{

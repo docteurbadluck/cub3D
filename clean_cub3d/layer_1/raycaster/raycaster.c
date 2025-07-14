@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 11:56:24 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/14 09:33:46 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:10:06 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,22 @@ void	raycasting_send_a_ray(t_raycast *r, const t_map *map)
 // we also look where does hit the other y to know which part of the wall 
 // has been hitted.
 
-void raycasting_finalize_hit(t_raycast *r, int size_of_block)
+void	raycasting_finalize_hit(t_raycast *r, int size_of_block)
 {
 	if (r->side == 0)
 	{
 		r->distance = ((r->case_x * size_of_block - r->pos_x)
-			+ (1 - r->step_x) * size_of_block / 2.0) / r->dir_x;
+				+ (1 - r->step_x) * size_of_block / 2.0) / r->dir_x;
 	}
 	else
 	{
 		r->distance = ((r->case_y * size_of_block - r->pos_y)
-			+ (1 - r->step_y) * size_of_block / 2.0) / r->dir_y;
+				+ (1 - r->step_y) * size_of_block / 2.0) / r->dir_y;
 	}
-
 	r->hit_x = r->pos_x + r->distance * r->dir_x;
 	r->hit_y = r->pos_y + r->distance * r->dir_y;
 }
+
 // Sends a ray in a given direction to detect the first wall hit.
 // Uses DDA to walk through the map grid until a wall is found.
 // Then calculates the exact distance to the wall and hit position.

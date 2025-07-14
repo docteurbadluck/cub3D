@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/14 09:37:03 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:13:14 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 	{
 		frame_buffer->rays[i].distance = raycast[i].distance;
 		frame_buffer->rays[i].side = raycast[i].side;
-		
 		frame_buffer->rays[i].hit_x = raycast[i].hit_x;
 		if (frame_buffer->rays[i].hit_x < 0)
 			frame_buffer->rays[i].hit_x = 0;
@@ -40,8 +39,6 @@ void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 			frame_buffer->rays[i].face = 'S';
 		else if (raycast[i].side == 1 && raycast[i].dir_y < 0)
 			frame_buffer->rays[i].face = 'N';
-		else
-			frame_buffer->rays[i].face = '?';
 		i++;
 	}
 }
@@ -52,7 +49,6 @@ void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 // framebuffer which contain an array of t_ray_hit (which contain 5 field only).
 // this allow a better readability.
 // it alsow allow us to free the data allocated into the logic layer. 
-
 void	update_vision(const t_player *player,
 	const t_map *map, t_i_displayer *display)
 {
@@ -60,7 +56,7 @@ void	update_vision(const t_player *player,
 	t_framebuffer	frame_buffer;
 
 	raycast = raycasting_multiple(player, map);
-	framebuffer_init(raycast, &frame_buffer); // hit is negatif sometime 
+	framebuffer_init(raycast, &frame_buffer);
 	free(raycast);
 	display->display(display, &frame_buffer);
 	display->display_minimap(display, map, player);

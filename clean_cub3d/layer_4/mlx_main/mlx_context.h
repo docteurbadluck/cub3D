@@ -6,20 +6,17 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 14:44:00 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:33:51 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_CONTEXT_H
-#define MLX_CONTEXT_H
-
-#include "mlx.h"
-#include "game_context.h"
+# define MLX_CONTEXT_H
+# include "mlx.h"
+# include "game_context.h"
 # include <X11/keysym.h>
 # include <X11/Xlib.h>
-#include <stdlib.h>
-
-
+# include <stdlib.h>
 # define HEIGHT 800
 # define WIDTH 800
 
