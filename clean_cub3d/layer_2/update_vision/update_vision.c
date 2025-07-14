@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 15:16:50 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 09:37:03 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,7 @@ void	update_vision(const t_player *player,
 	t_framebuffer	frame_buffer;
 
 	raycast = raycasting_multiple(player, map);
-	//printf("\n\nray info : distance : %.2f side : %d  hit x : %.2f ", raycast[0].distance,  raycast[0].side, raycast[0].hit_x);
-	//printf("hit y : %.2f \n", raycast[0].hit_y);
-	usleep(20000);
 	framebuffer_init(raycast, &frame_buffer); // hit is negatif sometime 
-	printf("ray info : distance : %.2f face : %c  hit x : %.2f hit_y : %.2f\n", frame_buffer.rays[NBR_RAY/2].distance, frame_buffer.rays[NBR_RAY/2].face, frame_buffer.rays[NBR_RAY/2].hit_x , frame_buffer.rays[NBR_RAY/2].hit_y);
 	free(raycast);
 	display->display(display, &frame_buffer);
 	display->display_minimap(display, map, player);

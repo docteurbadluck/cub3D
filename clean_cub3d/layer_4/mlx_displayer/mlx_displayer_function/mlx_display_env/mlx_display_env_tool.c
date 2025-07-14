@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 16:48:42 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 09:45:31 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,8 @@ void	init_line_to_draw_x_texture(t_line_to_display *line_to_display,
 	else
 		wall_x = frame_buff->rays[i].hit_x;
 
-	wall_x = fmod(wall_x, SIZE_OF_BLOCK);
-	if (wall_x < 0)
-		wall_x += SIZE_OF_BLOCK;
-	wall_x /= SIZE_OF_BLOCK;  // Normalize to [0.0, 1.0)
-
+	wall_x -= floor(wall_x);
 	line_to_display->texture_x = (int)(wall_x * line_to_display->texture->width);
-	
 	// Clamp
 	if (line_to_display->texture_x < 0)
 		line_to_display->texture_x = 0;

@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:48:44 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 10:23:20 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 09:59:53 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	player_move_forward(t_player *player, const t_map *map)
 	dy = sin(player->camera_direction) * player->speed;
 	new_x = player->pos_x + dx;
 	new_y = player->pos_y + dy;
-	if (!map_is_wall(map, new_x, player->pos_y))
+	if (!map_is_wall(map, new_x + dx, player->pos_y))
 		player->pos_x = new_x;
-	if (!map_is_wall(map, player->pos_x, new_y))
+	if (!map_is_wall(map, player->pos_x, new_y + dy))
 		player->pos_y = new_y;
 }
 
@@ -40,9 +40,9 @@ void	player_move_backward(t_player *player, const t_map *map)
 	dy = sin(player->camera_direction) * player->speed;
 	new_x = player->pos_x - dx;
 	new_y = player->pos_y - dy;
-	if (!map_is_wall(map, new_x, player->pos_y))
+	if (!map_is_wall(map, new_x - dx, player->pos_y))
 		player->pos_x = new_x;
-	if (!map_is_wall(map, player->pos_x, new_y))
+	if (!map_is_wall(map, player->pos_x, new_y - dy))
 		player->pos_y = new_y;
 }
 
@@ -57,9 +57,9 @@ void	player_move_left(t_player *player, const t_map *map)
 	dy = sin(player->camera_direction + M_PI / 2) * player->speed;
 	new_x = player->pos_x - dx;
 	new_y = player->pos_y - dy;
-	if (!map_is_wall(map, new_x, player->pos_y))
+	if (!map_is_wall(map, new_x - dx, player->pos_y))
 		player->pos_x = new_x;
-	if (!map_is_wall(map, player->pos_x, new_y))
+	if (!map_is_wall(map, player->pos_x, new_y - dy))
 		player->pos_y = new_y;
 }
 
@@ -74,8 +74,8 @@ void	player_move_right(t_player *player, const t_map *map)
 	dy = sin(player->camera_direction + M_PI / 2) * player->speed;
 	new_x = player->pos_x + dx;
 	new_y = player->pos_y + dy;
-	if (!map_is_wall(map, new_x, player->pos_y))
+	if (!map_is_wall(map, new_x + dx, player->pos_y))
 		player->pos_x = new_x;
-	if (!map_is_wall(map, player->pos_x, new_y))
+	if (!map_is_wall(map, player->pos_x, new_y + dy))
 		player->pos_y = new_y;
 }
