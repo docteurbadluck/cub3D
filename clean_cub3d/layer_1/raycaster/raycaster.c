@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 11:56:24 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 16:53:32 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 09:33:46 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,20 @@ void	raycasting_send_a_ray(t_raycast *r, const t_map *map)
 //we recalcule the distance know that we now the position of the wall.
 // we also look where does hit the other y to know which part of the wall 
 // has been hitted.
-void	raycasting_finalize_hit(t_raycast *r, int size_of_block)
+
+void raycasting_finalize_hit(t_raycast *r, int size_of_block)
 {
 	if (r->side == 0)
 	{
-		r->distance = ((r->case_x - r->pos_x / size_of_block)
-				+ (1 - r->step_x) / 2) * r->delta_x;
+		r->distance = ((r->case_x * size_of_block - r->pos_x)
+			+ (1 - r->step_x) * size_of_block / 2.0) / r->dir_x;
 	}
 	else
 	{
-		r->distance = ((r->case_y - r->pos_y / size_of_block)
-				+ (1 - r->step_y) / 2) * r->delta_y;
+		r->distance = ((r->case_y * size_of_block - r->pos_y)
+			+ (1 - r->step_y) * size_of_block / 2.0) / r->dir_y;
 	}
 
-//	printf("r->hit_x = r->pos_x + r->distance * r->dir_x\n");
-//	printf("%.2f = %.2f + %.2f * %.2f\n", r->hit_x, r->pos_x,r->distance, r->dir_x);
 	r->hit_x = r->pos_x + r->distance * r->dir_x;
 	r->hit_y = r->pos_y + r->distance * r->dir_y;
 }
@@ -70,7 +69,6 @@ t_raycast	raycasting(const t_player *player, const t_map *map, double angle)
 	raycast_init(player, map, &raycast, angle);
 	raycasting_send_a_ray(&raycast, map);
 	raycasting_finalize_hit(&raycast, map->size_of_block);
-	printf("%.2f \n", raycast.hit_x);
 	raycast.distance = fabs(raycast.distance);
 	return (raycast);
 }
