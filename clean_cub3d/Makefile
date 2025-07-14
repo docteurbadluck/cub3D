@@ -30,6 +30,7 @@ SRC = layer_main/main.c\
 	layer_1/player/player_helper.c \
 	layer_1/player/player_moove.c \
 	layer_1/raycaster/raycaster.c \
+	layer_1/raycaster/raycaster_sprite.c \
 	layer_1/raycaster/raycaster_init.c \
 	layer_1/raycaster/raycaster_multiple.c \
 	layer_2/update_position/update_position.c \

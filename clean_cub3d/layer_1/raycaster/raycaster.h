@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:49:55 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/10 13:24:37 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:40:24 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_raycast
 	double	distance;
 	double	hit_x;
 	double	hit_y;
+
+	int		sprite_type;
 }	t_raycast;
 
 typedef struct s_multiple_raycast
@@ -51,5 +53,7 @@ void		raycast_init(const t_player *player,
 				const t_map *map, t_raycast *r, double angle);
 t_raycast	raycasting(const t_player *player, const t_map *map, double angle);
 t_raycast	*raycasting_multiple(const t_player *player, const t_map *map);
+t_raycast	*raycasting_multiple_sprite(const t_player *player, const t_map *map);
+static double	normalize_angle(double angle);
 
 #endif

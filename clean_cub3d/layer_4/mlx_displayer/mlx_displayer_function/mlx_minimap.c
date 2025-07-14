@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/14 10:20:56 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:22:52 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define BLACK	0x000000
 #define CYAN	0x00FFFF
 #define RED		0xFF0000
+#define GREEN	0x00FF00
 
 typedef struct s_pixel_data
 {
@@ -59,8 +60,10 @@ void	minimap_background(t_mlx_displayer *displayer,
 		px.map_x = 0;
 		while (px.map_x < map->width)
 		{
-			if (map->grid[px.map_y][px.map_x] != 0)
+			if (map->grid[px.map_y][px.map_x] == 1)
 				px.color = WHITE;
+			else if (map->grid[px.map_y][px.map_x] == 2)
+				px.color = GREEN;
 			else
 				px.color = CYAN;
 			print_a_case(tile_size, displayer, &px);

@@ -6,12 +6,26 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:43:06 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/14 10:13:14 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:38:47 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "update_vision.h"
 
+void	framebuffer_init_face(int i,
+			t_raycast *raycast, t_framebuffer *frame_buffer)
+{
+		if (raycast[i].side == 0 && raycast[i].dir_x > 0)
+			frame_buffer->rays[i].face = 'W';
+		else if (raycast[i].side == 0 && raycast[i].dir_x < 0)
+			frame_buffer->rays[i].face = 'E';
+		else if (raycast[i].side == 1 && raycast[i].dir_y > 0)
+			frame_buffer->rays[i].face = 'S';
+		else if (raycast[i].side == 1 && raycast[i].dir_y < 0)
+			frame_buffer->rays[i].face = 'N';
+		else
+			frame_buffer->rays[i].face = '?';
+}
 //tranform the data from t_raycast into a a nicer data structure for 
 // our displayer. 
 void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
@@ -31,14 +45,7 @@ void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 			frame_buffer->rays[i].hit_y = 0;
 		frame_buffer->rays[i].dir_x = raycast[i].dir_x;
 		frame_buffer->rays[i].dir_y = raycast[i].dir_y;
-		if (raycast[i].side == 0 && raycast[i].dir_x > 0)
-			frame_buffer->rays[i].face = 'W';
-		else if (raycast[i].side == 0 && raycast[i].dir_x < 0)
-			frame_buffer->rays[i].face = 'E';
-		else if (raycast[i].side == 1 && raycast[i].dir_y > 0)
-			frame_buffer->rays[i].face = 'S';
-		else if (raycast[i].side == 1 && raycast[i].dir_y < 0)
-			frame_buffer->rays[i].face = 'N';
+		framebuffer_init_face(i, raycast, frame_buffer);
 		i++;
 	}
 }
@@ -50,14 +57,22 @@ void	framebuffer_init(t_raycast *raycast, t_framebuffer *frame_buffer)
 // this allow a better readability.
 // it alsow allow us to free the data allocated into the logic layer. 
 void	update_vision(const t_player *player,
-	const t_map *map, t_i_displayer *display)
+	const t_map *map, t_i_displayer *displayer)
 {
 	t_raycast		*raycast;
 	t_framebuffer	frame_buffer;
+	t_raycast		*raycast_sprite;
 
 	raycast = raycasting_multiple(player, map);
 	framebuffer_init(raycast, &frame_buffer);
 	free(raycast);
-	display->display(display, &frame_buffer);
-	display->display_minimap(display, map, player);
+	displayer->display(displayer, &frame_buffer);
+	displayer->display_minimap(displayer, map, player);
+	
+	raycast_sprite = raycasting_multiple_sprite(player, map);
+	printf("raycast_sprite : dist : %.2f, dir x : %.2f, dir y : %.2f, sprite_type : %d\n", raycast_sprite->distance, raycast_sprite->dir_x, raycast_sprite->dir_y, raycast_sprite->sprite_type);
+	
+
+	
+//	displayer->display_sprite(displayer, map, player);
 }

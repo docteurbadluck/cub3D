@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 11:34:40 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/11 15:18:45 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:21:03 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,18 @@ int main()
 	init_data.player_pos_x = 15;
 	init_data.player_pos_y = 15;
 	init_data.camera_direction = 0.0;
-	
+
 	init_data.map_height = 10;
 	init_data.map_width = 12;
 	grid = create_grid(init_data.map_height, init_data.map_width); // to replace by the reel map
+
+	grid[5][5] = 2;
 	init_data.grid = grid;
 
 	init_data.sky_color = CYAN;
 	init_data.ground_color = YELLOW;
 	init_data.textures_paths = pathnames;
-	
+
 	start_game(&game, &init_data);
 	return 0;
 }

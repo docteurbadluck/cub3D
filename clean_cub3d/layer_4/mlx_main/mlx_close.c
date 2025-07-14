@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 15:48:00 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/14 10:36:33 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 13:11:02 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	close_clean(t_mlx_game *GAME)
 {
 	t_mlx_displayer	*ptr_displayer;
 
+	free(GAME->game_context->player);
 	ptr_displayer = (t_mlx_displayer *)GAME->game_context->displayer;
 	destroy_texture(ptr_displayer);
+	free(ptr_displayer->textures);
+	mlx_destroy_image(GAME->my_mlx->mlx_ptr, ptr_displayer->minimap_img.img_ptr);
 	free(GAME->game_context->controller);
 	free(GAME->game_context->displayer);
 	free_map_grid(GAME->game_context->map);
@@ -58,6 +61,8 @@ void	close_clean(t_mlx_game *GAME)
 	mlx_destroy_window(GAME->my_mlx->mlx_ptr, GAME->my_mlx->win_ptr);
 	mlx_destroy_display(GAME->my_mlx->mlx_ptr);
 	free(GAME->my_mlx->mlx_ptr);
+	free(GAME->game_context);
+	free(GAME->my_mlx);
 	exit(0);
 }
 

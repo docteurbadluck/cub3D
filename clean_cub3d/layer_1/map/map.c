@@ -6,7 +6,7 @@
 /*   By: tdeliot <tdeliot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 10:37:24 by tdeliot           #+#    #+#             */
-/*   Updated: 2025/07/09 10:39:10 by tdeliot          ###   ########.fr       */
+/*   Updated: 2025/07/14 15:24:08 by tdeliot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	map_is_wall(const t_map *map, double pos_x, double pos_y)
 	{
 		return (1);
 	}
-	if (map->grid[index_y][index_x] != 0)
+	if (map->grid[index_y][index_x] == 1)
 	{
 		return (1);
 	}
