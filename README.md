@@ -32,6 +32,6 @@ collaborator : jholter
 - To run the project on your computer, **update the texture paths** in your map file to match your local setup.
 
 ## 🛠️ Build & Run
-make
-**update the texture paths in test.cub to match your config** 
+make  
+**update the texture paths in test.cub to match your config**  
 ./build/cub3d test.cub
