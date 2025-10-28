@@ -31,5 +31,5 @@ The goal is to explore graphics programming, math, and architecture through a si
 
 ## 🛠️ Build & Run
 make
- **update the texture paths in test.cub to match your config** 
+**update the texture paths in test.cub to match your config** 
 ./build/cub3d test.cub
