@@ -28,7 +28,7 @@ collaborator : jholter
 
 ## 🧠 Notes
 
-- I’ve tried to **apply Clean Architecture** concepts to separate logic and rendering.  
+- I’ve tried to **apply Clean Architecture** concepts to separate logic and rendering. (invert dependencies, single responsability principal)    
 - To run the project on your computer, **update the texture paths** in your map file to match your local setup.
 
 ## 🛠️ Build & Run
