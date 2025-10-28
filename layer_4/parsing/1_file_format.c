@@ -1,0 +1,110 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   1_file_format.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jholterh <jholterh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/12 16:21:51 by jholterh          #+#    #+#             */
+/*   Updated: 2025/09/15 12:34:24 by jholterh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
+
+// Safely reallocates memory for the file data array, increasing its size by 50.
+// Returns 1 on failure (and frees already allocated memory), 0 on success.
+static int	safe_file_realloc(char ***data, int *i)
+{
+	char	**tmp;
+	int		j;
+
+	j = *i;
+	tmp = (char **)ft_realloc2((void **)*data, j, j + 50);
+	if (!tmp)
+	{
+		print_error("Realloc failed", 1);
+		while (--j >= 0)
+			free((*data)[j]);
+		free(*data);
+		return (1);
+	}
+	free(*data);
+	*data = tmp;
+	return (0);
+}
+
+// Removes the newline character from a string, if present.
+static void	remove_newline(char *str)
+{
+	int	j;
+
+	j = 0;
+	while (str[j] != '\0')
+	{
+		if (str[j] == '\n')
+			str[j] = '\0';
+		j++;
+	}
+}
+
+// Reads lines from a file descriptor into a dynamically allocated array.
+// Each line is stripped of its newline character.
+// Returns 0 on success, 1 on failure.
+static int	safe_file(const int fd, char ***data)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	*data = malloc(50 * sizeof(char *));
+	if (!*data)
+		return (print_error("Malloc failed", 1));
+	while (1)
+	{
+		line = ft_get_next_line(fd);
+		if (line == NULL)
+			break ;
+		(*data)[i] = line;
+		remove_newline((*data)[i]);
+		i++;
+		if (i % 50 == 0)
+		{
+			if (safe_file_realloc(data, &i))
+				return (1);
+		}
+	}
+	(*data)[i] = NULL;
+	return (0);
+}
+
+// Checks if the given file has a valid .cub extension,
+// can be opened, and is not empty.
+// Reads the file into a dynamically allocated array of strings.
+// Returns 0 on success, 1 on failure.
+int	check_file_format(char *file, char ***data)
+{
+	int	str_len;
+	int	fd;
+
+	if (!file)
+		return (print_error("File is NULL", 1));
+	str_len = ft_strlen(file);
+	if (str_len < 4 || ft_strncmp(file + str_len - 4, ".cub", 4))
+		return (print_error("Filetype needs to be .cub", 1));
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (print_error("File could not be opened", 1));
+	if (safe_file(fd, data))
+	{
+		close(fd);
+		return (1);
+	}
+	close(fd);
+	if (!(*data)[0] || !(*data)[0][0])
+	{
+		ft_strfree(*data);
+		return (print_error("File is empty", 1));
+	}
+	return (0);
+}

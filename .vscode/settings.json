@@ -1,9 +1,24 @@
 {
 	"files.associations": {
+		"map.h": "c",
 		"player.h": "c",
-		"cstdlib": "c",
-		"mlx.h": "c",
+		"ranges": "c",
+		"mlx_displayer_function.h": "c",
+		"mlx_displayer.h": "c",
 		"mlx_controller.h": "c",
-		"mlx_context.h": "c"
+		"stdio.h": "c",
+		"map": "c",
+		"interface_displayer.h": "c",
+		"algorithm": "c",
+		"sprite_buffer.h": "c",
+		"frame_buffer.h": "c",
+		"mlx_displayer_init.h": "c",
+		"parsing.h": "c",
+		"mlx_context.h": "c",
+		"sprite.h": "c",
+		"game.h": "c",
+		"update_vision.h": "c",
+		"update_position.h": "c",
+		"parsing.h": "c"
 	}
 }
