@@ -2,8 +2,10 @@
 
 **Cub3D** is a small 3D game engine inspired by *Wolfenstein 3D*, built with **raycasting** and the **MiniLibX** library.  
 The goal is to explore graphics programming, math, and architecture through a simple first-person view engine.  
-collaborator : jholter  
-<img width="801" height="806" alt="Screenshot from 2025-10-28 16-15-05" src="https://github.com/user-attachments/assets/6a7cf7e7-58bd-4fdd-a023-c6bfa60d07f2" />
+collaborator : jholter
+
+
+<img width="600" height="600" alt="animation2" src="https://github.com/user-attachments/assets/815d176c-9d32-4750-b39a-af7270922ede" />
 
 ---
 
