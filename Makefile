@@ -125,7 +125,7 @@ NAME = $(BUILD_DIR)/cub3d
 
 
 # Default target
-all: lib create-dir $(NAME)
+all: deps lib create-dir fix-cub $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBX) $(LIBFT) -o $(NAME)
@@ -135,12 +135,21 @@ $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+deps:
+	@if [ ! -f /usr/include/X11/Xlib.h ] || [ ! -f /usr/include/bsd/bsd.h ]; then \
+		echo "Installing missing dev headers..."; \
+		sudo apt-get install -y libx11-dev libxext-dev libbsd-dev; \
+	fi
+
 lib:
 	@make -C layer_5/lib/libft > /dev/null 2>&1
 	@make -C layer_5/lib/minilibx-linux > /dev/null 2>&1
 
 create-dir:
 	@mkdir -p $(BUILD_DIR)
+
+fix-cub:
+	@sed -i -E 's#(NO|SO|WE|EA) .+/([^/]+\.xpm)#\1 $(PWD)/layer_5/texture/\2#' test.cub
 
 clean:
 	rm -f $(OBJ_FILES)
@@ -151,7 +160,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re lib create-dir test
+.PHONY: all clean fclean re lib create-dir deps fix-cub test
 
 # Include dependency files if they exist
 -include $(DEP_FILES)

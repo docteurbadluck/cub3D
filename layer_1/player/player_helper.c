@@ -25,7 +25,7 @@ void	init_player(t_player *A, int pos_x, int pos_y, double camera_direction)
 	A->pos_x = pos_x;
 	A->pos_y = pos_y;
 	A->camera_direction = camera_direction;
-	A->rotation_speed = M_PI / 90;
-	A->speed = 0.4;
+	A->rotation_speed = M_PI / 260;
+	A->speed = 0.05;
 	A->fov = FOV;
 }
