@@ -70,6 +70,42 @@ void	setup_color_helper(t_parse_helper *helper, char *type,
 	helper->index = 0;
 }
 
+// Extracts all space-separated paths after the type prefix from line.
+// Returns a NULL-terminated char** allocated via ft_split, or NULL on error.
+char	**extract_sprite_paths(char *line, char *type_prefix)
+{
+	int		type_len;
+	char	**paths;
+
+	type_len = ft_strlen(type_prefix);
+	while (*line && *line == ' ')
+		line++;
+	if (ft_strncmp(line, type_prefix, type_len) != 0)
+		return (NULL);
+	line += type_len;
+	paths = ft_split(line, ' ');
+	return (paths);
+}
+
+// Parses a sprite line and stores the paths in parsing_help->sprite_paths[idx]
+int	parse_sprite_line(t_parse_helper *helper, int idx)
+{
+	char	**paths;
+
+	if (*(helper->count) > 0)
+		return (print_error("Duplicate sprite identifier", 1));
+	(*(helper->count))++;
+	paths = extract_sprite_paths(helper->line, helper->type);
+	if (!paths || !paths[0])
+	{
+		if (paths)
+			ft_strfree(paths);
+		return (print_error("No texture paths for sprite", 1));
+	}
+	helper->parsing_help->sprite_paths[idx] = paths;
+	return (0);
+}
+
 // Checks if the line contains a texture identifier and parses it if found
 int	parse_texture_types(t_parse_helper *helper, char *line,
 		int *map_found, int *counts)

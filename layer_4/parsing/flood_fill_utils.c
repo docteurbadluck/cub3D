@@ -111,7 +111,10 @@ int	init_help_map(int **grid, int **help_map, int height, int width)
 		j = 0;
 		while (j < width)
 		{
-			help_map[i][j] = grid[i][j];
+			if (grid[i][j] >= 3 && grid[i][j] <= 5)
+				help_map[i][j] = 0;
+			else
+				help_map[i][j] = grid[i][j];
 			j++;
 		}
 		i++;

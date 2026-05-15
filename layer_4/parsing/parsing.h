@@ -33,6 +33,7 @@ typedef struct s_parsing_help
 	char	*sky_color_str;
 	int		sky_color[3];
 	char	**grid;
+	char	**sprite_paths[3];
 }	t_parsing_help;
 
 typedef struct s_parse_helper
@@ -94,8 +95,12 @@ int		parse_texture_types(t_parse_helper *helper, char *line,
 			int *map_found, int *counts);
 int		parse_color_types(t_parse_helper *helper, char *line,
 			int *map_found, int *counts);
+int		parse_sprite_types(t_parse_helper *helper, char *line,
+			int *map_found, int *counts);
 int		parse_texture_line(t_parse_helper *helper);
 int		parse_color_line(t_parse_helper *helper);
+char	**extract_sprite_paths(char *line, char *type_prefix);
+int		parse_sprite_line(t_parse_helper *helper, int idx);
 
 // texture logic
 int		check_and_parse_line(t_init_data *init_data,
@@ -122,12 +127,15 @@ int		extract_colors(char *color_str, int *color);
 // Validation and parsing
 int		validate_textures_parse(t_init_data *init_data,
 			t_parsing_help *parsing_help);
+int		build_sprite_paths(t_init_data *init_data,
+			t_parsing_help *parsing_help);
 
 // Free functions
 void	free_textures_and_colors(t_init_data *init_data,
 			t_parsing_help *parsing_help);
 void	free_map_grid(char **grid, int map_height);
 void	free_int_grid(int **grid, int height);
+void	free_sprite_paths(char ***paths);
 int		parsing_cleanup(t_init_data *init_data,
 			t_parsing_help *parsing_help, int exit_code);
 int		parsing_partial_cleanup(t_parsing_help *parsing_help,

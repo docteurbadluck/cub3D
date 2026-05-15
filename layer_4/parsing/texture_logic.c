@@ -12,6 +12,31 @@
 
 #include "parsing.h"
 
+// Checks if the line contains a sprite identifier (S1/S2/S3) and parses it
+int	parse_sprite_types(t_parse_helper *helper, char *line,
+		int *map_found, int *counts)
+{
+	if (!*map_found && check_for_type(line, "S1 "))
+	{
+		helper->type = "S1 ";
+		helper->count = &counts[6];
+		return (parse_sprite_line(helper, 0));
+	}
+	else if (!*map_found && check_for_type(line, "S2 "))
+	{
+		helper->type = "S2 ";
+		helper->count = &counts[7];
+		return (parse_sprite_line(helper, 1));
+	}
+	else if (!*map_found && check_for_type(line, "S3 "))
+	{
+		helper->type = "S3 ";
+		helper->count = &counts[8];
+		return (parse_sprite_line(helper, 2));
+	}
+	return (-1);
+}
+
 // Checks if the line contains a color identifier and parses it if found
 int	parse_color_types(t_parse_helper *helper, char *line,
 		int *map_found, int *counts)
@@ -31,11 +56,11 @@ int	parse_color_types(t_parse_helper *helper, char *line,
 	return (-1);
 }
 
-// Checks and parses a line for texture, color, or map data
+// Checks and parses a line for texture, color, sprite, or map data
 int	check_and_parse_line(t_init_data *init_data,
 		t_parsing_help *parsing_help, char *line, int *map_found)
 {
-	static int		counts[6] = {0, 0, 0, 0, 0, 0};
+	static int		counts[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 	t_parse_helper	helper;
 	int				result;
 
@@ -46,6 +71,9 @@ int	check_and_parse_line(t_init_data *init_data,
 	if (result != -1)
 		return (result);
 	result = parse_color_types(&helper, line, map_found, counts);
+	if (result != -1)
+		return (result);
+	result = parse_sprite_types(&helper, line, map_found, counts);
 	if (result != -1)
 		return (result);
 	if (check_for_type(line, "1") || check_for_type(line, "0"))

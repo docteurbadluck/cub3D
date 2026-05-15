@@ -56,6 +56,12 @@ static int	process_char(char **char_grid, int **int_grid,
 		if (set_player_position(init_data, pos, c))
 			return (1);
 	}
+	else if (c == '3')
+		int_grid[pos[0]][pos[1]] = 3;
+	else if (c == '4')
+		int_grid[pos[0]][pos[1]] = 4;
+	else if (c == '5')
+		int_grid[pos[0]][pos[1]] = 5;
 	else
 		return (print_error("Invalid character in map", 1));
 	return (0);

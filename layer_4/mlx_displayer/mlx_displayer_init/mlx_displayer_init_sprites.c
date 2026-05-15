@@ -58,7 +58,7 @@ void	displayer_init_sprite_data(t_mlx_displayer	*my_displayer,
 
 	i = 0;
 	my_displayer->sprites[y].current_texture = 0;
-	my_displayer->sprites[y].frame_by_texture = 25;
+	my_displayer->sprites[y].frame_by_texture = 10;
 	my_displayer->sprites[y].tick = 0;
 	while (filepath[y][i])
 		i++;

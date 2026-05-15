@@ -12,6 +12,22 @@
 
 #include "parsing.h"
 
+// Frees a NULL-terminated char*** (sprite paths array).
+void	free_sprite_paths(char ***paths)
+{
+	int	i;
+
+	if (!paths)
+		return ;
+	i = 0;
+	while (paths[i])
+	{
+		ft_strfree(paths[i]);
+		i++;
+	}
+	free(paths);
+}
+
 // Frees the textures and color strings in the init_data
 // and parsing_help structures.
 void	free_textures_and_colors(t_init_data *init_data,
@@ -24,6 +40,21 @@ void	free_textures_and_colors(t_init_data *init_data,
 	{
 		if (init_data->wall_textures_paths[i])
 			free(init_data->wall_textures_paths[i]);
+		i++;
+	}
+	if (init_data->sprite_textures_paths_all)
+	{
+		free_sprite_paths(init_data->sprite_textures_paths_all);
+		init_data->sprite_textures_paths_all = NULL;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		if (parsing_help->sprite_paths[i])
+		{
+			ft_strfree(parsing_help->sprite_paths[i]);
+			parsing_help->sprite_paths[i] = NULL;
+		}
 		i++;
 	}
 	if (parsing_help->ground_color_str)
@@ -93,6 +124,7 @@ int	parsing_partial_cleanup(t_parsing_help *parsing_help,
 		t_init_data *init_data)
 {
 	int	map_height;
+	int	i;
 
 	map_height = 0;
 	if (init_data)
@@ -104,6 +136,13 @@ int	parsing_partial_cleanup(t_parsing_help *parsing_help,
 		free(parsing_help->ground_color_str);
 	if (parsing_help->sky_color_str)
 		free(parsing_help->sky_color_str);
+	i = 0;
+	while (i < 3)
+	{
+		if (parsing_help->sprite_paths[i])
+			ft_strfree(parsing_help->sprite_paths[i]);
+		i++;
+	}
 	if (parsing_help->grid)
 		free_map_grid(parsing_help->grid, map_height);
 	free(parsing_help);

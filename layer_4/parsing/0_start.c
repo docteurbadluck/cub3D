@@ -20,6 +20,9 @@ int	init_parsing_help(t_parsing_help *parsing_help)
 	parsing_help->grid = NULL;
 	parsing_help->ground_color_str = NULL;
 	parsing_help->sky_color_str = NULL;
+	parsing_help->sprite_paths[0] = NULL;
+	parsing_help->sprite_paths[1] = NULL;
+	parsing_help->sprite_paths[2] = NULL;
 	parsing_help->ground_color[0] = -1;
 	parsing_help->ground_color[1] = -1;
 	parsing_help->ground_color[2] = -1;
@@ -46,6 +49,7 @@ void	init_struct(t_init_data *init_data)
 	init_data->wall_textures_paths[1] = NULL;
 	init_data->wall_textures_paths[2] = NULL;
 	init_data->wall_textures_paths[3] = NULL;
+	init_data->sprite_textures_paths_all = NULL;
 	init_data->sky_color = -1;
 	init_data->ground_color = -1;
 	init_data->player_pos_x = -1;

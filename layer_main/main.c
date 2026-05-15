@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	game.init_data = &init_data;
 	if (parsing(argc, argv, &init_data))
 		return (1);
-	init_data->sprite_textures_paths_all = NULL;
 	start_game(&game, init_data);
 	return (0);
 }

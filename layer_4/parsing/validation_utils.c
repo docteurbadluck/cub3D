@@ -12,6 +12,55 @@
 
 #include "parsing.h"
 
+// Validates that all sprite texture files exist and are readable
+static int	check_sprite_texture_paths(char ***paths)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (paths[i])
+	{
+		j = 0;
+		while (paths[i][j])
+		{
+			if (access(paths[i][j], F_OK) == -1)
+				return (print_error("Sprite texture file does not exist.", 1));
+			if (access(paths[i][j], R_OK) == -1)
+				return (print_error("Sprite texture file is not readable.", 1));
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+// Builds init_data->sprite_textures_paths_all from parsing_help->sprite_paths.
+// Transfers ownership: parsing_help->sprite_paths[i] become NULL after transfer.
+int	build_sprite_paths(t_init_data *init_data, t_parsing_help *parsing_help)
+{
+	int		count;
+	int		i;
+
+	count = 0;
+	while (count < 3 && parsing_help->sprite_paths[count])
+		count++;
+	if (count == 0)
+		return (0);
+	init_data->sprite_textures_paths_all = malloc(sizeof(char **) * (count + 1));
+	if (!init_data->sprite_textures_paths_all)
+		return (print_error("Memory error for sprite paths", 1));
+	i = 0;
+	while (i < count)
+	{
+		init_data->sprite_textures_paths_all[i] = parsing_help->sprite_paths[i];
+		parsing_help->sprite_paths[i] = NULL;
+		i++;
+	}
+	init_data->sprite_textures_paths_all[count] = NULL;
+	return (check_sprite_texture_paths(init_data->sprite_textures_paths_all));
+}
+
 // Checks if the texture files exist and are readable
 int	check_texture_paths(char **textures_paths)
 {
@@ -83,6 +132,8 @@ int	validate_textures_parse(t_init_data *init_data,
 		return (1);
 	if (flood_it_all(init_data->grid, init_data->map_height,
 			init_data->map_width))
+		return (1);
+	if (build_sprite_paths(init_data, parsing_help))
 		return (1);
 	return (0);
 }

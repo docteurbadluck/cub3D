@@ -15,8 +15,8 @@
 # include <stdio.h>
 # include <math.h>
 # include "map.h"
-# define SPEED 0.4
-# define ROTATION_SPEED 0.0174532925
+# define SPEED 2.5
+# define ROTATION_SPEED 0.05
 # define FOV 1.570796326794897
 
 typedef struct s_player

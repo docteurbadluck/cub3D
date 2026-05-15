@@ -19,13 +19,19 @@ void	link_displayer_interface_to_mlx_function(t_mlx_displayer *displayer);
 t_i_displayer	*create_displayer(t_mlx_data *mlx, t_init_data *init)
 {
 	t_mlx_displayer	*displayer;
+	char			*wall_paths[5];
 
+	wall_paths[0] = init->wall_textures_paths[0];
+	wall_paths[1] = init->wall_textures_paths[1];
+	wall_paths[2] = init->wall_textures_paths[2];
+	wall_paths[3] = init->wall_textures_paths[3];
+	wall_paths[4] = NULL;
 	displayer = malloc(sizeof(t_mlx_displayer));
 	if (!displayer)
 		return (NULL);
 	displayer->mlx = mlx;
 	link_displayer_interface_to_mlx_function(displayer);
-	init_displayer_texture(displayer, init->wall_textures_paths);
+	init_displayer_texture(displayer, wall_paths);
 	displayer_init_sprites(displayer, init->sprite_textures_paths_all);
 	init_displayer_color(displayer, init->sky_color, init->ground_color);
 	init_displayer_minimap(displayer);
